@@ -5,9 +5,9 @@
 @layer base {
   :root {
     --color-electric: #ff1744;
-    --color-electric-glow: #ff003c;
-    --color-navy-dark: #050204;
-    --color-navy-card: #0c0508;
+    --color-electric-glow: #ff0055;
+    --color-navy-dark: #050207;
+    --color-navy-card: rgba(255, 255, 255, 0.03);
   }
 
   html {
@@ -16,25 +16,25 @@
   }
 
   body {
-    background-color: #050204;
-    color: #fce7f3;
+    background-color: #050207;
+    color: #f1f5f9;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Custom subtle scrollbar with crimson accents */
+  /* Custom subtle scrollbar with crimson/rose accents */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #050204;
+    background: #050207;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #2b0f1b;
+    background: rgba(244, 63, 94, 0.25);
     border-radius: 4px;
-    border: 1px solid rgba(255, 23, 68, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -54,7 +54,7 @@
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(255, 23, 68, 0.45), transparent 60%, rgba(244, 63, 94, 0.3));
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.45), transparent 60%, rgba(255, 23, 68, 0.3));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -62,35 +62,25 @@
   }
 
   .bg-grid-cyber {
-    background-size: 36px 36px;
+    background-size: 38px 38px;
     background-image: 
-      linear-gradient(to right, rgba(255, 23, 68, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 23, 68, 0.05) 1px, transparent 1px);
-  }
-
-  .bg-dots-cyber {
-    background-size: 24px 24px;
-    background-image: radial-gradient(circle, rgba(255, 23, 68, 0.12) 1px, transparent 1px);
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   }
 
   .electric-text-gradient {
-    background: linear-gradient(135deg, #ffffff 0%, #fecdd3 40%, #ff1744 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fecdd3 45%, #ff2a55 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .electric-accent-gradient {
-    background: linear-gradient(135deg, #ff003c 0%, #ff1744 50%, #f43f5e 100%);
+    background: linear-gradient(135deg, #ff0055 0%, #ff2a55 50%, #f43f5e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .radar-sweep {
-    background: conic-gradient(from 0deg at 50% 50%, rgba(255, 23, 68, 0) 0deg, rgba(255, 23, 68, 0.25) 300deg, rgba(255, 23, 68, 0.8) 360deg);
+    background: conic-gradient(from 0deg at 50% 50%, rgba(244, 63, 94, 0) 0deg, rgba(244, 63, 94, 0.15) 300deg, rgba(244, 63, 94, 0.6) 360deg);
   }
-}
-
-/* Code block highlight effects */
-.code-glow {
-  text-shadow: 0 0 12px rgba(255, 23, 68, 0.5);
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { projects, Project } from '../data/projects';
 import { ProjectCard } from '../components/ProjectCard';
 import { SectionHeading } from '../components/SectionHeading';
@@ -39,14 +40,14 @@ export const Projects: React.FC = () => {
             variant="outline"
             size="sm"
             icon={<Github className="w-4 h-4 text-rose-400" />}
-            className="w-fit"
+            className="w-fit bg-white/[0.03] hover:bg-white/[0.08] border-white/[0.1] text-slate-200"
           >
             Explore All on GitHub
           </Button>
         </div>
 
-        {/* Filter Navigation */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-slate-800">
+        {/* Filter Navigation with Translucent Glass */}
+        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/[0.08]">
           <div className="flex items-center gap-2 mr-2 text-xs font-mono text-slate-500">
             <Filter className="w-3.5 h-3.5 text-rose-400" />
             <span>Filter:</span>
@@ -56,15 +57,15 @@ export const Projects: React.FC = () => {
             <button
               key={tab.id}
               onClick={() => setActiveFilter(tab.id as typeof activeFilter)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 flex items-center gap-2 ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-200 flex items-center gap-2 ${
                 activeFilter === tab.id
-                  ? 'bg-red-600 text-white font-bold shadow-crimson-sm'
-                  : 'bg-navy-900/60 text-slate-300 hover:text-white hover:bg-navy-850 border border-slate-800'
+                  ? 'bg-gradient-to-r from-rose-600 to-red-600 text-white font-bold shadow-[0_0_15px_rgba(225,29,72,0.4)]'
+                  : 'bg-white/[0.03] text-slate-300 hover:text-white hover:bg-white/[0.07] border border-white/[0.08] backdrop-blur-md'
               }`}
             >
               <span>{tab.label}</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded ${
-                activeFilter === tab.id ? 'bg-navy-950/30 text-white font-bold' : 'bg-navy-800 text-slate-400'
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                activeFilter === tab.id ? 'bg-black/25 text-white font-bold' : 'bg-white/[0.06] text-slate-400'
               }`}>
                 {tab.count}
               </span>
@@ -74,15 +75,20 @@ export const Projects: React.FC = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project: Project) => (
-            <ProjectCard key={project.id} project={project} />
+          {filteredProjects.map((project: Project, index: number) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
 
-        {/* Note on Authenticity */}
-        <div className="mt-12 p-4 rounded-xl bg-navy-900/40 border border-slate-800 text-center text-xs text-slate-400 font-mono">
+        {/* Note on Authenticity with Translucent Glass */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-12 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center text-xs text-slate-400 font-mono backdrop-blur-md"
+        >
           <span>🔒 All codebases are authenticated with <span className="text-rose-400 font-semibold">@{personalInfo.githubUsername}</span> on GitHub. Live Demo buttons are rendered strictly when active production deployments exist.</span>
-        </div>
+        </motion.div>
 
       </div>
     </section>

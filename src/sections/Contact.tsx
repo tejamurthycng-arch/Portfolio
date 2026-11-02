@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { personalInfo } from '../data/personalInfo';
 import { SectionHeading } from '../components/SectionHeading';
 import { Button } from '../components/Button';
@@ -61,18 +62,24 @@ export const Contact: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
-          {/* Left Column: Direct Contact Info & Cards */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Left Column: Direct Contact Info & Cards with Motion */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
             
             {/* Primary Email Card */}
-            <div className="p-6 sm:p-7 rounded-2xl bg-navy-900/80 border border-red-500/30 shadow-crimson-sm backdrop-blur-md">
+            <div className="p-6 sm:p-7 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-glass backdrop-blur-2xl">
               <div className="flex items-center justify-between mb-4">
-                <span className="p-3 rounded-xl bg-navy-800 text-rose-400 border border-red-500/30">
+                <span className="p-3 rounded-2xl bg-white/[0.05] text-rose-400 border border-white/[0.1] shadow-sm">
                   <Mail className="w-6 h-6" />
                 </span>
                 <button
                   onClick={handleCopyEmail}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono bg-navy-800 hover:bg-navy-700 text-rose-300 border border-red-500/20 transition-all"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono bg-white/[0.05] hover:bg-white/[0.1] text-rose-300 border border-white/[0.1] transition-all"
                   title="Copy email to clipboard"
                 >
                   {copiedEmail ? (
@@ -104,9 +111,9 @@ export const Contact: React.FC = () => {
             </div>
 
             {/* Location & Academic Base */}
-            <div className="p-6 rounded-2xl bg-navy-900/50 border border-slate-800 space-y-4">
+            <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/[0.08] space-y-4 backdrop-blur-2xl shadow-glass">
               <div className="flex items-start gap-3.5">
-                <span className="p-2.5 rounded-xl bg-navy-800 text-rose-400 border border-red-500/20 mt-0.5">
+                <span className="p-2.5 rounded-xl bg-white/[0.05] text-rose-400 border border-white/[0.08] mt-0.5">
                   <MapPin className="w-5 h-5" />
                 </span>
                 <div>
@@ -122,7 +129,7 @@ export const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
                 <span className="text-xs font-mono text-slate-400">GitHub Profile:</span>
                 <a
                   href={personalInfo.githubUrl}
@@ -153,21 +160,27 @@ export const Contact: React.FC = () => {
             </div>
 
             {/* Availability status */}
-            <div className="p-4 rounded-xl bg-red-950/40 border border-red-500/20 flex items-center gap-3">
+            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center gap-3 backdrop-blur-xl">
               <span className="relative flex h-3 w-3 flex-shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
               </span>
               <p className="text-xs text-slate-300">
                 Open to internships, open source collaborations, and software development discussions.
               </p>
             </div>
 
-          </div>
+          </motion.div>
 
-          {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 rounded-2xl bg-navy-900/80 border border-slate-800 shadow-lg backdrop-blur-md">
+          {/* Right Column: Contact Form with Motion */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7"
+          >
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-glass backdrop-blur-2xl">
               <div className="flex items-center gap-2 mb-6">
                 <MessageSquare className="w-5 h-5 text-rose-400" />
                 <h3 className="text-lg font-bold text-white">
@@ -187,7 +200,7 @@ export const Contact: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Jane Doe"
-                      className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
+                      className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
                     />
                   </div>
 
@@ -201,7 +214,7 @@ export const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="jane@example.com"
-                      className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
+                      className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -215,7 +228,7 @@ export const Contact: React.FC = () => {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     placeholder="Project Inquiry / Opportunity"
-                    className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
+                    className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
                   />
                 </div>
 
@@ -229,7 +242,7 @@ export const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Hi Tejamurthy, I came across your work and would love to connect regarding..."
-                    className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all resize-none"
                   ></textarea>
                 </div>
 
@@ -245,7 +258,7 @@ export const Contact: React.FC = () => {
                   variant="primary"
                   size="md"
                   icon={<Send className="w-4 h-4" />}
-                  className="w-full justify-center"
+                  className="w-full justify-center bg-gradient-to-r from-rose-600 to-red-600 shadow-[0_0_20px_rgba(225,29,72,0.35)]"
                 >
                   Send via Email Client
                 </Button>
@@ -255,7 +268,7 @@ export const Contact: React.FC = () => {
                 </p>
               </form>
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

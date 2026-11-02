@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { skillCategories, SkillCategory } from '../data/skills';
 import { SkillCard } from '../components/SkillCard';
 import { SectionHeading } from '../components/SectionHeading';
@@ -29,14 +30,14 @@ export const Skills: React.FC = () => {
           subtitle="Authentic tech stack featuring programming languages, frontend libraries, backend runtimes, databases, and version control tools."
         />
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 pb-3 border-b border-slate-800">
+        {/* Category Filter Tabs with Translucent Glass */}
+        <div className="flex flex-wrap items-center gap-2 mb-12 pb-4 border-b border-white/[0.08]">
           <button
             onClick={() => setActiveCategory('all')}
-            className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-200 ${
+            className={`px-4 py-2 rounded-full text-xs font-mono transition-all duration-200 ${
               activeCategory === 'all'
-                ? 'bg-red-600 text-white font-bold shadow-crimson-sm'
-                : 'bg-navy-900/60 text-slate-300 hover:text-white hover:bg-navy-850 border border-slate-800'
+                ? 'bg-gradient-to-r from-rose-600 to-red-600 text-white font-bold shadow-[0_0_15px_rgba(225,29,72,0.4)]'
+                : 'bg-white/[0.03] text-slate-300 hover:text-white hover:bg-white/[0.07] border border-white/[0.08] backdrop-blur-md'
             }`}
           >
             All Technologies ({skillCategories.reduce((acc, c) => acc + c.skills.length, 0)})
@@ -46,15 +47,15 @@ export const Skills: React.FC = () => {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono transition-all duration-200 ${
                 activeCategory === category.id
-                  ? 'bg-red-500/20 text-rose-300 font-semibold border border-red-500/40 shadow-sm'
-                  : 'bg-navy-900/40 text-slate-400 hover:text-slate-200 hover:bg-navy-850 border border-slate-800/80'
+                  ? 'bg-rose-500/20 text-rose-300 font-semibold border border-rose-500/40 shadow-sm backdrop-blur-md'
+                  : 'bg-white/[0.02] text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] border border-white/[0.06] backdrop-blur-md'
               }`}
             >
               {categoryIcons[category.id]}
               <span>{category.title}</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-navy-800 text-slate-400">
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/[0.06] text-slate-400">
                 {category.skills.length}
               </span>
             </button>
@@ -62,20 +63,27 @@ export const Skills: React.FC = () => {
         </div>
 
         {/* Skills Categories Display */}
-        <div className="space-y-12">
+        <div className="space-y-14">
           {filteredCategories.map((category: SkillCategory) => (
-            <div key={category.id} className="relative">
+            <motion.div 
+              key={category.id} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
+            >
               
               {/* Category Subheading */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2.5 rounded-xl bg-navy-900 border border-red-500/25">
+              <div className="flex items-center gap-3.5 mb-6">
+                <div className="p-2.5 rounded-2xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-md text-rose-400 shadow-sm">
                   {categoryIcons[category.id]}
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white tracking-tight">
                     {category.title}
                   </h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-400 mt-0.5">
                     {category.shortDesc}
                   </p>
                 </div>
@@ -83,12 +91,12 @@ export const Skills: React.FC = () => {
 
               {/* Grid of Skill Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {category.skills.map((skill) => (
-                  <SkillCard key={skill.name} skill={skill} />
+                {category.skills.map((skill, index) => (
+                  <SkillCard key={skill.name} skill={skill} index={index} />
                 ))}
               </div>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 

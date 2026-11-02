@@ -9,16 +9,19 @@ import { Education } from './sections/Education';
 import { Achievements } from './sections/Achievements';
 import { Contact } from './sections/Contact';
 import { Footer } from './components/Footer';
+import { StarfieldBackground } from './components/StarfieldBackground';
 
 export const App: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-navy-950 text-slate-100 flex flex-col selection:bg-red-600 selection:text-white">
-      {/* Top ambient glow light in Crimson Red */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-7xl h-48 bg-gradient-to-b from-red-600/15 via-rose-500/5 to-transparent blur-3xl pointer-events-none z-0"></div>
+    <div className="relative min-h-screen bg-[#050207] text-slate-100 flex flex-col selection:bg-rose-600 selection:text-white overflow-x-hidden">
+      {/* Motion Graphics Miniature Stars & Ambient Cosmic Space Background */}
+      <StarfieldBackground />
 
+      {/* Navigation */}
       <Navbar />
 
-      <main className="flex-grow z-10">
+      {/* Main Content with Layered Glassmorphic Depth */}
+      <main className="flex-grow z-10 relative">
         <Hero />
         <About />
         <Skills />
@@ -29,6 +32,7 @@ export const App: React.FC = () => {
         <Contact />
       </main>
 
+      {/* Footer */}
       <Footer />
     </div>
   );
