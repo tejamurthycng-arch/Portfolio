@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="cyber-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="#060c1b" stroke="#00d4ff" stroke-width="3" stroke-opacity="0.4"/>
+  <text x="50" y="62" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="42" fill="url(#cyber-grad)" text-anchor="middle" letter-spacing="1">TM</text>
+</svg>

@@ -1,0 +1,90 @@
+import React, { useState } from 'react';
+import { projects, Project } from '../data/projects';
+import { ProjectCard } from '../components/ProjectCard';
+import { SectionHeading } from '../components/SectionHeading';
+import { Github, Filter } from 'lucide-react';
+import { Button } from '../components/Button';
+import { personalInfo } from '../data/personalInfo';
+
+export const Projects: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<'all' | 'fullstack' | 'ai' | 'frontend' | 'systems'>('all');
+
+  const filterTabs = [
+    { id: 'all', label: 'All Projects', count: projects.length },
+    { id: 'fullstack', label: 'Full-Stack & Computer Vision', count: projects.filter(p => p.category === 'fullstack').length },
+    { id: 'ai', label: 'AI & Data Ecosystems', count: projects.filter(p => p.category === 'ai').length },
+    { id: 'frontend', label: 'Frontend & UI', count: projects.filter(p => p.category === 'frontend').length },
+    { id: 'systems', label: 'Systems & C', count: projects.filter(p => p.category === 'systems').length },
+  ];
+
+  const filteredProjects = activeFilter === 'all'
+    ? projects
+    : projects.filter(p => p.category === activeFilter);
+
+  return (
+    <section id="projects" className="py-20 md:py-28 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <SectionHeading
+            badge="// 03. VERIFIED PROJECTS"
+            title="Featured Engineering Work"
+            subtitle="Authentic repositories analyzed directly from my GitHub profile. No fictional projects, mock metrics, or synthetic claims."
+            className="mb-0"
+          />
+
+          <Button
+            href={personalInfo.githubUrl}
+            external
+            variant="outline"
+            size="sm"
+            icon={<Github className="w-4 h-4 text-cyan-400" />}
+            className="w-fit"
+          >
+            Explore All on GitHub
+          </Button>
+        </div>
+
+        {/* Filter Navigation */}
+        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-slate-800">
+          <div className="flex items-center gap-2 mr-2 text-xs font-mono text-slate-500">
+            <Filter className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Filter:</span>
+          </div>
+
+          {filterTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveFilter(tab.id as typeof activeFilter)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 flex items-center gap-2 ${
+                activeFilter === tab.id
+                  ? 'bg-electric text-navy-950 font-bold shadow-electric-sm'
+                  : 'bg-navy-900/60 text-slate-300 hover:text-white hover:bg-navy-850 border border-slate-800'
+              }`}
+            >
+              <span>{tab.label}</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded ${
+                activeFilter === tab.id ? 'bg-navy-950/20 text-navy-950 font-bold' : 'bg-navy-800 text-slate-400'
+              }`}>
+                {tab.count}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map((project: Project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+
+        {/* Note on Authenticity */}
+        <div className="mt-12 p-4 rounded-xl bg-navy-900/40 border border-slate-800 text-center text-xs text-slate-400 font-mono">
+          <span>🔒 All codebases are authenticated with <span className="text-cyan-400 font-semibold">@{personalInfo.githubUsername}</span> on GitHub. Live Demo buttons are rendered strictly when active production deployments exist.</span>
+        </div>
+
+      </div>
+    </section>
+  );
+};
