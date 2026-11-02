@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Interactive Particle Background
+   Pure Black (#000000) + Tiny White Particles + Rapid Scroll Velocity + Cursor Disturbance
+   ========================================================================== */
+
+.animated-bg-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* 60fps Canvas rendering particles & motion graphic effects */
+.animated-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+/* Subtle edge vignette for cinematic depth */
+.animated-bg-vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse 95% 85% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.85) 100%);
+  pointer-events: none;
+  z-index: 2;
+}

@@ -10,15 +10,15 @@ import { Education } from './sections/Education';
 import { Achievements } from './sections/Achievements';
 import { Contact } from './sections/Contact';
 import { Footer } from './components/Footer';
-import { DynamicBackground } from './components/DynamicBackground';
+import { AnimatedBackground } from './components/AnimatedBackground/AnimatedBackground';
 import { SmoothScroll } from './components/SmoothScroll';
 
 export const App: React.FC = () => {
   return (
     <SmoothScroll>
       <div className="relative min-h-screen bg-black text-slate-100 flex flex-col selection:bg-violet-600 selection:text-white overflow-x-hidden">
-        {/* Interactive 60fps Dynamic Background Engine with Preset Switcher */}
-        <DynamicBackground />
+        {/* Interactive 60fps Particle Field with Rapid Scroll Velocity & Cursor Motion Graphics */}
+        <AnimatedBackground />
 
         {/* Navigation */}
         <Navbar />
