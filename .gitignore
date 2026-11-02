@@ -26,3 +26,6 @@ dist-ssr
 # Temporary analysis caches
 github_repos.json
 repo_analysis.json
+
+# Local Vite Cache
+.vite
