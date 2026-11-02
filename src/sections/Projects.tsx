@@ -39,8 +39,8 @@ export const Projects: React.FC = () => {
             external
             variant="outline"
             size="sm"
-            icon={<Github className="w-4 h-4 text-rose-400" />}
-            className="w-fit bg-white/[0.03] hover:bg-white/[0.08] border-white/[0.1] text-slate-200"
+            icon={<Github className="w-4 h-4 text-cyan-400" />}
+            className="w-fit glass-pill hover:bg-white/[0.08] text-slate-200"
           >
             Explore All on GitHub
           </Button>
@@ -49,7 +49,7 @@ export const Projects: React.FC = () => {
         {/* Filter Navigation with Translucent Glass */}
         <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/[0.08]">
           <div className="flex items-center gap-2 mr-2 text-xs font-mono text-slate-500">
-            <Filter className="w-3.5 h-3.5 text-rose-400" />
+            <Filter className="w-3.5 h-3.5 text-cyan-400" />
             <span>Filter:</span>
           </div>
 
@@ -59,13 +59,13 @@ export const Projects: React.FC = () => {
               onClick={() => setActiveFilter(tab.id as typeof activeFilter)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-200 flex items-center gap-2 ${
                 activeFilter === tab.id
-                  ? 'bg-gradient-to-r from-rose-600 to-red-600 text-white font-bold shadow-[0_0_15px_rgba(225,29,72,0.4)]'
-                  : 'bg-white/[0.03] text-slate-300 hover:text-white hover:bg-white/[0.07] border border-white/[0.08] backdrop-blur-md'
+                  ? 'bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 text-white font-bold shadow-[0_0_18px_rgba(139,92,246,0.4)]'
+                  : 'glass-pill text-slate-300 hover:text-white hover:bg-white/[0.08]'
               }`}
             >
               <span>{tab.label}</span>
               <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                activeFilter === tab.id ? 'bg-black/25 text-white font-bold' : 'bg-white/[0.06] text-slate-400'
+                activeFilter === tab.id ? 'bg-black/25 text-white font-bold' : 'bg-white/[0.08] text-slate-300'
               }`}>
                 {tab.count}
               </span>
@@ -85,9 +85,9 @@ export const Projects: React.FC = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-12 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center text-xs text-slate-400 font-mono backdrop-blur-md"
+          className="mt-12 p-4 rounded-2xl glass-panel text-center text-xs text-slate-400 font-mono"
         >
-          <span>🔒 All codebases are authenticated with <span className="text-rose-400 font-semibold">@{personalInfo.githubUsername}</span> on GitHub. Live Demo buttons are rendered strictly when active production deployments exist.</span>
+          <span>🔒 All codebases are authenticated with <span className="text-cyan-400 font-semibold">@{personalInfo.githubUsername}</span> on GitHub. Live Demo buttons are rendered strictly when active production deployments exist.</span>
         </motion.div>
 
       </div>

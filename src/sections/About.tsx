@@ -32,10 +32,10 @@ export const About: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-rose-500/40 shadow-glass relative overflow-hidden backdrop-blur-2xl"
+              className="p-6 sm:p-7 rounded-2xl glass-card relative overflow-hidden"
             >
-              <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-rose-500 to-red-600"></div>
-              <p className="text-base sm:text-lg text-slate-100 font-medium leading-relaxed italic">
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-violet-500 via-indigo-500 to-cyan-400"></div>
+              <p className="text-base sm:text-lg text-slate-100 font-medium leading-relaxed italic pl-2">
                 "{personalInfo.aboutIntro}"
               </p>
             </motion.div>
@@ -48,9 +48,9 @@ export const About: React.FC = () => {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -4 }}
-                className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-rose-500/40 hover:bg-white/[0.05] transition-all backdrop-blur-xl shadow-glass"
+                className="p-5 rounded-2xl glass-card transition-all"
               >
-                <span className="p-2.5 rounded-xl bg-white/[0.05] text-rose-400 border border-white/[0.08] inline-block mb-3">
+                <span className="p-2.5 rounded-xl bg-violet-500/10 text-cyan-400 border border-violet-500/20 inline-block mb-3">
                   <GraduationCap className="w-5 h-5" />
                 </span>
                 <h4 className="text-white font-bold text-base mb-1.5">Academics</h4>
@@ -65,9 +65,9 @@ export const About: React.FC = () => {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -4 }}
-                className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-rose-500/40 hover:bg-white/[0.05] transition-all backdrop-blur-xl shadow-glass"
+                className="p-5 rounded-2xl glass-card transition-all"
               >
-                <span className="p-2.5 rounded-xl bg-white/[0.05] text-rose-400 border border-white/[0.08] inline-block mb-3">
+                <span className="p-2.5 rounded-xl bg-violet-500/10 text-cyan-400 border border-violet-500/20 inline-block mb-3">
                   <Code2 className="w-5 h-5" />
                 </span>
                 <h4 className="text-white font-bold text-base mb-1.5">Technical Focus</h4>
@@ -82,9 +82,9 @@ export const About: React.FC = () => {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -4 }}
-                className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-rose-500/40 hover:bg-white/[0.05] transition-all backdrop-blur-xl shadow-glass"
+                className="p-5 rounded-2xl glass-card transition-all"
               >
-                <span className="p-2.5 rounded-xl bg-white/[0.05] text-rose-400 border border-white/[0.08] inline-block mb-3">
+                <span className="p-2.5 rounded-xl bg-violet-500/10 text-cyan-400 border border-violet-500/20 inline-block mb-3">
                   <BrainCircuit className="w-5 h-5" />
                 </span>
                 <h4 className="text-white font-bold text-base mb-1.5">Growth Mindset</h4>
@@ -103,10 +103,10 @@ export const About: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-2xl shadow-glass"
+              className="p-6 rounded-2xl glass-panel"
             >
-              <h3 className="text-xs font-mono uppercase tracking-wider text-rose-400 font-semibold mb-4 flex items-center gap-2">
-                <BookOpen className="w-4 h-4" />
+              <h3 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold mb-4 flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-violet-400" />
                 Quick Overview
               </h3>
 
@@ -117,7 +117,7 @@ export const About: React.FC = () => {
                 </div>
                 <div className="flex justify-between items-center py-1.5 border-b border-white/[0.06]">
                   <span className="text-slate-400">Role</span>
-                  <span className="text-rose-400 font-medium">{personalInfo.role}</span>
+                  <span className="text-violet-300 font-medium">{personalInfo.role}</span>
                 </div>
                 <div className="flex justify-between items-center py-1.5 border-b border-white/[0.06]">
                   <span className="text-slate-400">College</span>
@@ -130,7 +130,7 @@ export const About: React.FC = () => {
                 <div className="flex justify-between items-center py-1.5 border-b border-white/[0.06]">
                   <span className="text-slate-400">Location</span>
                   <span className="text-white font-medium flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                     {personalInfo.location}
                   </span>
                 </div>
@@ -140,7 +140,7 @@ export const About: React.FC = () => {
                     href={personalInfo.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-rose-400 hover:underline"
+                    className="text-cyan-400 hover:text-violet-300 hover:underline"
                   >
                     @{personalInfo.githubUsername}
                   </a>

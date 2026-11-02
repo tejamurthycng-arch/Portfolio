@@ -26,10 +26,10 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       className={cn("mb-12 md:mb-16", align === 'center' ? "text-center mx-auto max-w-2xl" : "max-w-2xl", className)}
     >
       <div className={cn(
-        "inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium border border-rose-500/30 bg-rose-500/10 text-rose-300 mb-4 backdrop-blur-xl shadow-sm",
+        "inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium border border-violet-500/30 bg-violet-500/10 text-violet-300 mb-4 backdrop-blur-xl shadow-glass",
         align === 'center' ? "mx-auto" : ""
       )}>
-        <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse shadow-[0_0_8px_#f43f5e]"></span>
+        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]"></span>
         {badge}
       </div>
 

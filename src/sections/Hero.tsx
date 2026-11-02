@@ -77,11 +77,11 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full bg-rose-500/10 border border-rose-500/30 text-xs font-mono text-rose-200 w-fit mb-5 sm:mb-6 shadow-[0_0_15px_rgba(244,63,94,0.2)] backdrop-blur-2xl"
+              className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full bg-violet-500/10 border border-violet-500/30 text-xs font-mono text-violet-200 w-fit mb-5 sm:mb-6 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-2xl"
             >
               <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 bg-rose-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 bg-cyan-500"></span>
               </span>
               <span className="truncate max-w-[260px] sm:max-w-none">Available for Technical Projects & Roles</span>
             </motion.div>
@@ -93,9 +93,9 @@ export const Hero: React.FC = () => {
 
             {/* Dynamic Animated Role */}
             <div className="h-9 sm:h-12 flex items-center justify-center lg:justify-start mb-5 sm:mb-6">
-              <span className="text-lg sm:text-2xl md:text-3xl font-semibold font-mono text-rose-400">
+              <span className="text-lg sm:text-2xl md:text-3xl font-semibold font-mono text-cyan-400">
                 {displayedText}
-                <span className="inline-block w-2 sm:w-2.5 h-5 sm:h-6 ml-1 bg-rose-500 animate-pulse align-middle shadow-[0_0_10px_#f43f5e]"></span>
+                <span className="inline-block w-2 sm:w-2.5 h-5 sm:h-6 ml-1 bg-cyan-400 animate-pulse align-middle shadow-[0_0_10px_#06b6d4]"></span>
               </span>
             </div>
 
@@ -111,7 +111,7 @@ export const Hero: React.FC = () => {
                 variant="primary"
                 size="md"
                 icon={<ArrowRight className="w-4 h-4" />}
-                className="w-full sm:w-auto text-sm px-7 py-3 justify-center bg-gradient-to-r from-rose-600 to-red-600 shadow-[0_0_20px_rgba(225,29,72,0.35)]"
+                className="w-full sm:w-auto text-sm px-7 py-3 justify-center shadow-[0_0_25px_rgba(139,92,246,0.4)]"
               >
                 View Projects
               </Button>
@@ -120,9 +120,9 @@ export const Hero: React.FC = () => {
                 href="#about"
                 variant="secondary"
                 size="md"
-                icon={<Compass className="w-4 h-4 text-rose-400" />}
+                icon={<Compass className="w-4 h-4 text-cyan-400" />}
                 iconPosition="left"
-                className="w-full sm:w-auto text-sm px-6 py-3 justify-center bg-white/[0.04] hover:bg-white/[0.08] border-white/[0.1] text-slate-200"
+                className="w-full sm:w-auto text-sm px-6 py-3 justify-center glass-pill hover:bg-white/[0.08] text-slate-200"
               >
                 Explore My Journey
               </Button>
@@ -132,8 +132,8 @@ export const Hero: React.FC = () => {
                 external
                 variant="outline"
                 size="md"
-                icon={<FileDown className="w-4 h-4 text-rose-400" />}
-                className="w-full sm:w-auto text-sm px-6 py-3 justify-center bg-transparent hover:bg-white/[0.06] border-white/[0.1] text-slate-300"
+                icon={<FileDown className="w-4 h-4 text-violet-400" />}
+                className="w-full sm:w-auto text-sm px-6 py-3 justify-center glass-pill text-slate-300"
               >
                 Resume
               </Button>
@@ -150,7 +150,7 @@ export const Hero: React.FC = () => {
                   href={personalInfo.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-slate-300 hover:text-white hover:border-rose-500/50 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] backdrop-blur-xl transition-all duration-200"
+                  className="p-2.5 sm:p-3 rounded-2xl glass-card text-slate-300 hover:text-white hover:border-violet-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.35)] transition-all duration-200"
                   aria-label="GitHub Profile"
                 >
                   <Github className="w-4 h-4" />
@@ -160,7 +160,7 @@ export const Hero: React.FC = () => {
                   href={personalInfo.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-slate-300 hover:text-white hover:border-rose-500/50 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] backdrop-blur-xl transition-all duration-200"
+                  className="p-2.5 sm:p-3 rounded-2xl glass-card text-slate-300 hover:text-white hover:border-violet-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.35)] transition-all duration-200"
                   aria-label="LinkedIn Profile"
                   title="Configurable LinkedIn URL"
                 >
@@ -169,7 +169,7 @@ export const Hero: React.FC = () => {
 
                 <a
                   href={`mailto:${personalInfo.email}`}
-                  className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-slate-300 hover:text-white hover:border-rose-500/50 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] backdrop-blur-xl transition-all duration-200"
+                  className="p-2.5 sm:p-3 rounded-2xl glass-card text-slate-300 hover:text-white hover:border-violet-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.35)] transition-all duration-200"
                   aria-label="Email Tejamurthy M"
                 >
                   <Mail className="w-4 h-4" />
@@ -178,7 +178,7 @@ export const Hero: React.FC = () => {
 
               <div className="flex items-center gap-2 pl-3 sm:pl-4 text-xs font-mono text-slate-400 border-l border-white/[0.08]">
                 <span className="text-slate-500">College:</span>
-                <span className="text-rose-200 font-medium">BMSCE Bangalore</span>
+                <span className="text-violet-200 font-medium">BMSCE Bangalore</span>
               </div>
             </div>
           </motion.div>
@@ -193,36 +193,36 @@ export const Hero: React.FC = () => {
             >
               
               {/* Outer Ambient Glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-rose-600/25 via-red-500/15 to-transparent blur-2xl sm:blur-3xl animate-pulse-slow"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-violet-600/25 via-cyan-500/15 to-transparent blur-2xl sm:blur-3xl animate-pulse-slow"></div>
 
               {/* Outer Rotating HUD Ring */}
-              <div className="absolute inset-2 sm:inset-3 rounded-full border border-dashed border-rose-500/35 animate-spin-slow"></div>
+              <div className="absolute inset-2 sm:inset-3 rounded-full border border-dashed border-violet-500/35 animate-spin-slow"></div>
               
               {/* Counter-Rotating Middle HUD Ring */}
-              <div className="absolute inset-8 sm:inset-10 rounded-full border border-rose-500/25 animate-spin-reverse">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-rose-500 shadow-[0_0_10px_#f43f5e]"></div>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-red-400 shadow-[0_0_10px_#f43f5e]"></div>
+              <div className="absolute inset-8 sm:inset-10 rounded-full border border-cyan-500/25 animate-spin-reverse">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#06b6d4]"></div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-violet-400 shadow-[0_0_10px_#8b5cf6]"></div>
               </div>
 
               {/* Inner Concentric Circle with Translucent Glass */}
-              <div className="absolute inset-16 sm:inset-20 rounded-full border border-rose-500/40 bg-white/[0.02] backdrop-blur-2xl flex items-center justify-center shadow-inner">
+              <div className="absolute inset-16 sm:inset-20 rounded-full border border-violet-500/35 bg-white/[0.02] backdrop-blur-2xl flex items-center justify-center shadow-inner">
                 {/* Radar Sweep Effect */}
-                <div className="absolute inset-0 rounded-full radar-sweep opacity-25 animate-radar"></div>
+                <div className="absolute inset-0 rounded-full radar-sweep opacity-30 animate-radar"></div>
               </div>
 
               {/* Central Glowing Core Card with Translucent Glass */}
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative z-20 w-28 h-28 sm:w-36 sm:h-36 rounded-2xl sm:rounded-3xl bg-white/[0.04] border-2 border-rose-500/60 shadow-[0_0_30px_rgba(244,63,94,0.3)] flex flex-col items-center justify-center p-2.5 sm:p-3 text-center backdrop-blur-2xl group cursor-pointer"
+                className="relative z-20 w-28 h-28 sm:w-36 sm:h-36 rounded-2xl sm:rounded-3xl glass-card border-violet-500/50 shadow-[0_0_35px_rgba(139,92,246,0.35)] flex flex-col items-center justify-center p-2.5 sm:p-3 text-center group cursor-pointer"
               >
-                <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-rose-500/15 border border-rose-500/40 flex items-center justify-center text-rose-400 mb-1.5 sm:mb-2 group-hover:scale-110 transition-transform shadow-md backdrop-blur-md">
-                  <Zap className="w-4 h-4 sm:w-6 sm:h-6 text-rose-500 animate-pulse" />
+                <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-violet-500/20 to-cyan-500/20 border border-violet-500/40 flex items-center justify-center text-cyan-300 mb-1.5 sm:mb-2 group-hover:scale-110 transition-transform shadow-md backdrop-blur-md">
+                  <Zap className="w-4 h-4 sm:w-6 sm:h-6 text-cyan-400 animate-pulse" />
                 </div>
                 <span className="font-display font-extrabold text-white text-xs sm:text-base tracking-tight">
                   Tejamurthy
                 </span>
-                <span className="text-[9px] sm:text-[10px] font-mono text-rose-300 font-medium">
+                <span className="text-[9px] sm:text-[10px] font-mono text-violet-300 font-medium">
                   BMSCE • 2nd Year
                 </span>
               </motion.div>
@@ -248,7 +248,7 @@ export const Hero: React.FC = () => {
                       opacity: { duration: 0.6, delay: 0.4 + node.delay },
                     }}
                     whileHover={{ scale: 1.25, zIndex: 30 }}
-                    className="absolute z-20 p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-white/[0.04] border border-white/[0.1] shadow-glass backdrop-blur-2xl cursor-pointer hover:border-rose-500/80 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(244,63,94,0.4)] transition-all"
+                    className="absolute z-20 p-2 sm:p-2.5 rounded-xl sm:rounded-2xl glass-card cursor-pointer hover:border-cyan-400/80 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all"
                     title={node.name}
                   >
                     <TechIcon name={node.name} className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -257,7 +257,7 @@ export const Hero: React.FC = () => {
               })}
 
               {/* Live telemetry micro-badges */}
-              <div className="absolute -bottom-3 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] shadow-lg text-[10px] sm:text-[11px] font-mono text-slate-300 flex items-center gap-1.5 sm:gap-2 z-20 backdrop-blur-2xl">
+              <div className="absolute -bottom-3 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full glass-pill shadow-lg text-[10px] sm:text-[11px] font-mono text-slate-300 flex items-center gap-1.5 sm:gap-2 z-20">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></span>
                 <span>System Online • Bangalore, IN</span>
               </div>

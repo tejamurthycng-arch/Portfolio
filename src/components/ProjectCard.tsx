@@ -22,31 +22,31 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -5 }}
-      className="group relative flex flex-col justify-between h-full rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-rose-500/50 hover:bg-white/[0.06] transition-all duration-300 hover:shadow-[0_10px_35px_-5px_rgba(244,63,94,0.25)] overflow-hidden p-6 sm:p-7 backdrop-blur-xl shadow-glass"
+      className="group relative flex flex-col justify-between h-full rounded-2xl glass-card overflow-hidden p-6 sm:p-7"
     >
-      {/* Top subtle crimson highlight on hover */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-rose-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      {/* Top subtle violet-cyan highlight on hover */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
       <div>
         {/* Header badges */}
         <div className="flex items-center justify-between gap-2 mb-4">
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-xl bg-white/[0.05] text-rose-400 border border-white/[0.08]">
+            <span className="p-2 rounded-xl bg-violet-500/10 text-cyan-400 border border-violet-500/20">
               <Code className="w-4 h-4" />
             </span>
-            <span className="text-xs font-mono text-rose-300 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/25 backdrop-blur-md">
+            <span className="text-xs font-mono text-cyan-300 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/25 backdrop-blur-md">
               {project.repoName}
             </span>
           </div>
           {project.featured && (
-            <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/35">
+            <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-violet-500/15 text-violet-200 border border-violet-500/35">
               Featured
             </span>
           )}
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-rose-400 transition-colors duration-200">
+        <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-cyan-300 transition-colors duration-200">
           {project.name}
         </h3>
 
@@ -60,7 +60,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
           <div className="mb-5 space-y-1.5 pt-3 border-t border-white/[0.06]">
             {project.highlights.map((highlight, idx) => (
               <div key={idx} className="flex items-start gap-2 text-xs text-slate-400">
-                <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 mt-0.5 flex-shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
                 <span>{highlight}</span>
               </div>
             ))}
@@ -91,7 +91,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
               size="sm"
               icon={<Github className="w-3.5 h-3.5" />}
               iconPosition="left"
-              className="flex-1 text-xs bg-white/[0.04] hover:bg-white/[0.09] border-white/[0.1] text-slate-200"
+              className="flex-1 text-xs glass-pill hover:bg-white/[0.08] text-slate-200"
             >
               GitHub Repo
             </Button>
@@ -106,7 +106,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0 }) 
               size="sm"
               icon={<ExternalLink className="w-3.5 h-3.5" />}
               iconPosition="right"
-              className="flex-1 text-xs bg-gradient-to-r from-rose-600 to-red-600 shadow-md"
+              className="flex-1 text-xs shadow-[0_0_15px_rgba(139,92,246,0.35)]"
             >
               Live Demo
             </Button>

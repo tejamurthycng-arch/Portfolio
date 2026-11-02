@@ -6,11 +6,11 @@ import { SectionHeading } from '../components/SectionHeading';
 import { Code, Layout, Server, Database, Wrench } from 'lucide-react';
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  languages: <Code className="w-4 h-4 text-rose-400" />,
-  frontend: <Layout className="w-4 h-4 text-rose-400" />,
-  backend: <Server className="w-4 h-4 text-rose-400" />,
-  database: <Database className="w-4 h-4 text-rose-400" />,
-  tools: <Wrench className="w-4 h-4 text-rose-400" />,
+  languages: <Code className="w-4 h-4 text-cyan-400" />,
+  frontend: <Layout className="w-4 h-4 text-cyan-400" />,
+  backend: <Server className="w-4 h-4 text-cyan-400" />,
+  database: <Database className="w-4 h-4 text-cyan-400" />,
+  tools: <Wrench className="w-4 h-4 text-cyan-400" />,
 };
 
 export const Skills: React.FC = () => {
@@ -36,8 +36,8 @@ export const Skills: React.FC = () => {
             onClick={() => setActiveCategory('all')}
             className={`px-4 py-2 rounded-full text-xs font-mono transition-all duration-200 ${
               activeCategory === 'all'
-                ? 'bg-gradient-to-r from-rose-600 to-red-600 text-white font-bold shadow-[0_0_15px_rgba(225,29,72,0.4)]'
-                : 'bg-white/[0.03] text-slate-300 hover:text-white hover:bg-white/[0.07] border border-white/[0.08] backdrop-blur-md'
+                ? 'bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 text-white font-bold shadow-[0_0_20px_rgba(139,92,246,0.4)]'
+                : 'glass-pill text-slate-300 hover:text-white hover:bg-white/[0.08]'
             }`}
           >
             All Technologies ({skillCategories.reduce((acc, c) => acc + c.skills.length, 0)})
@@ -49,13 +49,13 @@ export const Skills: React.FC = () => {
               onClick={() => setActiveCategory(category.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono transition-all duration-200 ${
                 activeCategory === category.id
-                  ? 'bg-rose-500/20 text-rose-300 font-semibold border border-rose-500/40 shadow-sm backdrop-blur-md'
-                  : 'bg-white/[0.02] text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] border border-white/[0.06] backdrop-blur-md'
+                  ? 'bg-violet-500/20 text-cyan-300 font-semibold border border-violet-500/40 shadow-[0_0_15px_rgba(139,92,246,0.25)] backdrop-blur-md'
+                  : 'glass-pill text-slate-400 hover:text-slate-200 hover:bg-white/[0.08]'
               }`}
             >
               {categoryIcons[category.id]}
               <span>{category.title}</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/[0.06] text-slate-400">
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/[0.08] text-slate-300">
                 {category.skills.length}
               </span>
             </button>
@@ -76,7 +76,7 @@ export const Skills: React.FC = () => {
               
               {/* Category Subheading */}
               <div className="flex items-center gap-3.5 mb-6">
-                <div className="p-2.5 rounded-2xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-md text-rose-400 shadow-sm">
+                <div className="p-2.5 rounded-2xl glass-pill text-cyan-400 shadow-sm">
                   {categoryIcons[category.id]}
                 </div>
                 <div>

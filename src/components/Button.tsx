@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const baseStyles = "relative inline-flex items-center justify-center font-medium transition-all duration-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-navy-950 disabled:opacity-50 disabled:pointer-events-none group overflow-hidden select-none";
+  const baseStyles = "relative inline-flex items-center justify-center font-medium transition-all duration-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#05060f] disabled:opacity-50 disabled:pointer-events-none group overflow-hidden select-none";
 
   const sizeStyles = {
     sm: "px-4 py-2 text-xs gap-1.5",
@@ -31,10 +31,10 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantStyles = {
-    primary: "bg-red-600 text-white font-semibold shadow-crimson-sm hover:shadow-crimson hover:bg-red-500 active:scale-[0.98]",
-    secondary: "bg-navy-850/90 text-slate-100 border border-red-500/25 hover:border-red-500/60 hover:bg-navy-800 hover:text-white active:scale-[0.98] shadow-sm",
-    outline: "bg-transparent text-slate-300 border border-slate-700/80 hover:border-red-500/80 hover:text-white hover:bg-red-500/10 active:scale-[0.98]",
-    ghost: "bg-transparent text-slate-400 hover:text-rose-400 hover:bg-red-500/10 active:scale-[0.98]",
+    primary: "bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-semibold shadow-[0_0_25px_rgba(139,92,246,0.45)] border border-white/20 active:scale-[0.98]",
+    secondary: "bg-white/[0.04] text-slate-100 border border-white/15 hover:border-violet-500/60 hover:bg-white/[0.08] hover:text-white active:scale-[0.98] backdrop-blur-xl shadow-glass",
+    outline: "bg-transparent text-slate-300 border border-white/15 hover:border-violet-500/80 hover:text-white hover:bg-violet-500/10 active:scale-[0.98]",
+    ghost: "bg-transparent text-slate-400 hover:text-violet-300 hover:bg-white/[0.06] active:scale-[0.98]",
   };
 
   const content = (

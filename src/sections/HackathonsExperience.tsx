@@ -37,8 +37,8 @@ export const HackathonsExperience: React.FC = () => {
               onClick={() => setSelectedType(tab.id)}
               className={`px-4 py-2 rounded-full text-xs font-mono transition-all duration-200 ${
                 selectedType === tab.id
-                  ? 'bg-gradient-to-r from-rose-600 to-red-600 text-white font-bold shadow-[0_0_15px_rgba(225,29,72,0.4)]'
-                  : 'bg-white/[0.03] text-slate-300 hover:text-white hover:bg-white/[0.07] border border-white/[0.08] backdrop-blur-md'
+                  ? 'bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 text-white font-bold shadow-[0_0_18px_rgba(139,92,246,0.4)]'
+                  : 'glass-pill text-slate-300 hover:text-white hover:bg-white/[0.08]'
               }`}
             >
               {tab.label}
@@ -59,9 +59,9 @@ export const HackathonsExperience: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-3xl bg-white/[0.03] border border-white/[0.08] p-8 md:p-12 backdrop-blur-2xl text-center max-w-3xl mx-auto shadow-glass"
+            className="rounded-3xl glass-card p-8 md:p-12 text-center max-w-3xl mx-auto"
           >
-            <div className="w-16 h-16 rounded-2xl bg-white/[0.05] border border-rose-500/30 flex items-center justify-center text-rose-400 mx-auto mb-5 shadow-[0_0_20px_rgba(244,63,94,0.3)]">
+            <div className="w-16 h-16 rounded-2xl bg-white/[0.05] border border-violet-500/30 flex items-center justify-center text-cyan-400 mx-auto mb-5 shadow-[0_0_20px_rgba(139,92,246,0.3)]">
               <Award className="w-8 h-8" />
             </div>
 
@@ -74,18 +74,18 @@ export const HackathonsExperience: React.FC = () => {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left mb-8 max-w-2xl mx-auto">
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md">
-                <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-semibold mb-1.5">
+              <div className="p-4 rounded-2xl glass-pill">
+                <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold mb-1.5">
                   <FileText className="w-4 h-4" />
                   <span>1. Upload PDF</span>
                 </div>
                 <p className="text-xs text-slate-400">
-                  Save your certificate PDF into <code className="text-rose-300">public/certificates/</code>.
+                  Save your certificate PDF into <code className="text-violet-300">public/certificates/</code>.
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md">
-                <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-semibold mb-1.5">
+              <div className="p-4 rounded-2xl glass-pill">
+                <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold mb-1.5">
                   <ShieldCheck className="w-4 h-4" />
                   <span>2. Verify Metadata</span>
                 </div>
@@ -94,8 +94,8 @@ export const HackathonsExperience: React.FC = () => {
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md">
-                <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-semibold mb-1.5">
+              <div className="p-4 rounded-2xl glass-pill">
+                <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold mb-1.5">
                   <Sparkles className="w-4 h-4" />
                   <span>3. Render Card</span>
                 </div>
@@ -105,8 +105,8 @@ export const HackathonsExperience: React.FC = () => {
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-rose-500/30 text-xs font-mono text-rose-300 backdrop-blur-md">
-              <CheckCircle2 className="w-4 h-4 text-rose-500" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-pill border-violet-500/30 text-xs font-mono text-violet-300">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               <span>Configurable in <code>src/data/hackathons.ts</code></span>
             </div>
           </motion.div>
