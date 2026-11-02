@@ -28,10 +28,10 @@ export const TechMarquee: React.FC = () => {
   const duplicatedTech = [...techList, ...techList, ...techList];
 
   return (
-    <section className="relative py-7 sm:py-9 overflow-hidden bg-black border-y border-white/[0.06]">
+    <section className="relative py-7 sm:py-9 overflow-hidden bg-transparent border-y border-white/[0.06]">
       {/* Left and Right Edge Fade Masks */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-36 bg-gradient-to-r from-black via-black/80 to-transparent z-20 pointer-events-none"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-36 bg-gradient-to-l from-black via-black/80 to-transparent z-20 pointer-events-none"></div>
+      <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-36 bg-gradient-to-r from-[#030407] via-[#030407]/80 to-transparent z-20 pointer-events-none"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-36 bg-gradient-to-l from-[#030407] via-[#030407]/80 to-transparent z-20 pointer-events-none"></div>
 
       {/* Single Unified Marquee Ribbon */}
       <div className="flex select-none overflow-hidden">

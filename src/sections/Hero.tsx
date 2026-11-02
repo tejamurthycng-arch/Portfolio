@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   ArrowRight, 
   FileDown, 
@@ -13,7 +15,13 @@ import { personalInfo } from '../data/personalInfo';
 import { Button } from '../components/Button';
 import { TechIcon } from '../components/TechIcons';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const Hero: React.FC = () => {
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const textColRef = useRef<HTMLDivElement | null>(null);
+  const visualColRef = useRef<HTMLDivElement | null>(null);
+
   // Animated role text typing effect
   const roles = [
     "Aspiring Software Engineer",
@@ -49,6 +57,42 @@ export const Hero: React.FC = () => {
     return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, roleIndex]);
 
+  // GSAP ScrollTrigger Cinematic Parallax
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (textColRef.current) {
+        gsap.to(textColRef.current, {
+          y: -50,
+          opacity: 0.85,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          }
+        });
+      }
+
+      if (visualColRef.current) {
+        gsap.to(visualColRef.current, {
+          y: -30,
+          scale: 0.85,
+          opacity: 0.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          }
+        });
+      }
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   // Floating tech nodes with Framer Motion (responsive offsets)
   const techNodes = [
     { name: "C", desktopX: -85, desktopY: -85, mobileX: -65, mobileY: -65, delay: 0 },
@@ -60,17 +104,18 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section id="home" className="relative min-h-[92vh] flex items-center pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden">
+    <section ref={heroRef} id="home" className="relative min-h-[92vh] flex items-center pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
-          {/* Left Column: Heading, Role & CTAs with Framer Motion */}
-          <motion.div 
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left items-center lg:items-start"
-          >
+          {/* Left Column: Heading, Role & CTAs with GSAP Parallax Ref & Framer Motion */}
+          <div ref={textColRef} className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left items-center lg:items-start">
+            <motion.div 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full flex flex-col items-center lg:items-start"
+            >
             
             {/* Live Status Pill with Translucent Glass */}
             <motion.div 
@@ -182,9 +227,10 @@ export const Hero: React.FC = () => {
               </div>
             </div>
           </motion.div>
+        </div>
 
-          {/* Right Column: Translucent Holographic HUD & Tech Core */}
-          <div className="lg:col-span-5 flex items-center justify-center w-full py-4 sm:py-0 overflow-hidden">
+        {/* Right Column: Translucent Holographic HUD & Tech Core with GSAP Parallax Ref */}
+        <div ref={visualColRef} className="lg:col-span-5 flex items-center justify-center w-full py-4 sm:py-0 overflow-hidden">
             <motion.div 
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}

@@ -1,17 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects, Project } from '../data/projects';
 import { ProjectCard } from '../components/ProjectCard';
 import { SectionHeading } from '../components/SectionHeading';
-import { Github, Filter, GitBranch, LayoutGrid, Sparkles } from 'lucide-react';
+import { Github, Filter, GitBranch, PanelsTopLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../components/Button';
 import { personalInfo } from '../data/personalInfo';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'fullstack' | 'ai' | 'frontend' | 'systems'>('all');
-  const [viewMode, setViewMode] = useState<'timeline' | 'grid'>('timeline');
+  const [viewMode, setViewMode] = useState<'horizontal' | 'timeline'>('horizontal');
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  // GSAP Horizontal Scroll Refs
+  const horizontalSectionRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
+
+  // Timeline Scroll Ref
+  const timelineContainerRef = useRef<HTMLDivElement | null>(null);
 
   const filterTabs = [
     { id: 'all', label: 'All Projects', count: projects.length },
@@ -25,9 +35,53 @@ export const Projects: React.FC = () => {
     ? projects
     : projects.filter(p => p.category === activeFilter);
 
-  // Scroll animated progress for the curved timeline line
+  // ========================================================
+  // GSAP PINNED HORIZONTAL SCROLL ANIMATION (Desktop: md+)
+  // ========================================================
+  useEffect(() => {
+    if (viewMode !== 'horizontal') return;
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      const section = horizontalSectionRef.current;
+      const track = trackRef.current;
+      if (!section || !track) return;
+
+      const getScrollAmount = () => Math.max(0, track.scrollWidth - window.innerWidth + 160);
+
+      const tween = gsap.to(track, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 1,
+          start: "top top+=75",
+          end: () => `+=${getScrollAmount()}`,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            if (progressBarRef.current) {
+              progressBarRef.current.style.transform = `scaleX(${self.progress})`;
+            }
+          }
+        }
+      });
+
+      return () => {
+        tween.kill();
+      };
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => mm.revert();
+  }, [viewMode, filteredProjects]);
+
+  // Timeline Scroll Progress
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: timelineContainerRef,
     offset: ["start 65%", "end 75%"]
   });
 
@@ -37,11 +91,10 @@ export const Projects: React.FC = () => {
     restDelta: 0.001
   });
 
-  // Calculate dynamic laser photon indicator position (0% to 100%)
   const photonY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="projects" className="py-20 md:py-28 relative overflow-hidden bg-black">
+    <section id="projects" className="py-20 md:py-28 relative bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -49,13 +102,25 @@ export const Projects: React.FC = () => {
           <SectionHeading
             badge="// 03. VERIFIED PROJECTS"
             title="Featured Engineering Work"
-            subtitle="Authentic repositories analyzed directly from my GitHub profile. No fictional projects, mock metrics, or synthetic claims."
+            subtitle="Authentic repositories analyzed directly from my GitHub profile. Controlled horizontal gallery & timeline backed by genuine codebases."
             className="mb-0"
           />
 
           <div className="flex items-center gap-3">
-            {/* View Mode Switcher (Timeline vs Grid) */}
+            {/* View Mode Switcher (Horizontal Gallery vs Curved Timeline) */}
             <div className="p-1 rounded-2xl glass-pill flex items-center gap-1">
+              <button
+                onClick={() => setViewMode('horizontal')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all ${
+                  viewMode === 'horizontal'
+                    ? 'bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold shadow-sm'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+                title="GSAP Horizontal Pinned Gallery"
+              >
+                <PanelsTopLeft className="w-3.5 h-3.5" />
+                <span>Horizontal Gallery</span>
+              </button>
               <button
                 onClick={() => setViewMode('timeline')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all ${
@@ -67,18 +132,6 @@ export const Projects: React.FC = () => {
               >
                 <GitBranch className="w-3.5 h-3.5" />
                 <span>Timeline</span>
-              </button>
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all ${
-                  viewMode === 'grid'
-                    ? 'bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-                title="3D Card Grid View"
-              >
-                <LayoutGrid className="w-3.5 h-3.5" />
-                <span>Grid</span>
               </button>
             </div>
 
@@ -96,7 +149,7 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Filter Navigation with Translucent Glass */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 pb-4 border-b border-white/[0.08]">
+        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/[0.08]">
           <div className="flex items-center gap-2 mr-2 text-xs font-mono text-slate-500">
             <Filter className="w-3.5 h-3.5 text-cyan-400" />
             <span>Filter:</span>
@@ -122,25 +175,80 @@ export const Projects: React.FC = () => {
           ))}
         </div>
 
-        {/* ======================================================== */}
-        {/* VIEW 1: SCROLL ANIMATED TIMELINE WITH CURVED LINE       */}
-        {/* ======================================================== */}
-        {viewMode === 'timeline' ? (
-          <div ref={containerRef} className="relative py-6 max-w-6xl mx-auto">
-            
-            {/* SVG Background Track & Scroll-Animated Curved Line (Desktop: Center, Mobile: Left) */}
-            <div className="absolute top-0 bottom-0 left-5 md:left-1/2 -translate-x-1/2 w-8 pointer-events-none z-10 flex justify-center">
-              
-              {/* Static Background Guide Track */}
-              <div className="w-[2px] h-full bg-white/[0.07] rounded-full"></div>
+      </div>
 
-              {/* Scroll-Animated Illuminated Glowing Laser Line */}
+      {/* ======================================================== */}
+      {/* VIEW 1: GSAP PINNED HORIZONTAL SCROLL GALLERY           */}
+      {/* ======================================================== */}
+      {viewMode === 'horizontal' ? (
+        <div ref={horizontalSectionRef} className="relative w-full">
+          
+          {/* Top Progress Bar Indicator (Desktop) */}
+          <div className="hidden md:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+            <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+              <span className="flex items-center gap-1.5 text-cyan-300">
+                <span>Scroll vertically to pan project gallery</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+              <span>{filteredProjects.length} Verified Repositories</span>
+            </div>
+            <div className="w-full h-1 bg-white/[0.08] rounded-full overflow-hidden">
+              <div
+                ref={progressBarRef}
+                className="h-full bg-gradient-to-r from-violet-500 via-indigo-500 to-cyan-400 rounded-full origin-left transition-transform duration-75"
+                style={{ transform: 'scaleX(0)' }}
+              />
+            </div>
+          </div>
+
+          {/* Desktop Horizontal Track Container */}
+          <div className="hidden md:block overflow-hidden py-4">
+            <div
+              ref={trackRef}
+              className="flex items-stretch gap-8 px-4 sm:px-8 lg:px-12 w-max"
+            >
+              {filteredProjects.map((project: Project, index: number) => (
+                <div
+                  key={project.id}
+                  className="w-[420px] lg:w-[460px] flex-shrink-0"
+                >
+                  <ProjectCard project={project} index={index} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile / Tablet Horizontal Swipeable Native Gallery (<768px) */}
+          <div className="md:hidden px-4">
+            <div className="flex items-center gap-2 mb-3 text-xs font-mono text-slate-400">
+              <span className="text-cyan-400">👉 Swipe horizontally to view projects</span>
+            </div>
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-2 no-scrollbar">
+              {filteredProjects.map((project: Project, index: number) => (
+                <div
+                  key={project.id}
+                  className="w-[85vw] max-w-[340px] flex-shrink-0 snap-center"
+                >
+                  <ProjectCard project={project} index={index} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      ) : (
+        /* ======================================================== */
+        /* VIEW 2: SCROLL-ANIMATED CURVED TIMELINE VIEW            */
+        /* ======================================================== */
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div ref={timelineContainerRef} className="relative py-6 max-w-6xl mx-auto">
+            {/* SVG Background Track & Scroll-Animated Curved Line */}
+            <div className="absolute top-0 bottom-0 left-5 md:left-1/2 -translate-x-1/2 w-8 pointer-events-none z-10 flex justify-center">
+              <div className="w-[2px] h-full bg-white/[0.07] rounded-full"></div>
               <motion.div
                 style={{ height: photonY }}
                 className="absolute top-0 w-[3px] bg-gradient-to-b from-violet-500 via-indigo-400 to-cyan-400 rounded-full shadow-[0_0_16px_rgba(6,182,212,0.85)] origin-top"
               />
-
-              {/* Glowing Traveling Photon Orb at the Head of the Scroll Line */}
               <motion.div
                 style={{ top: photonY }}
                 className="absolute -translate-y-1/2 w-4 h-4 rounded-full bg-cyan-300 border-2 border-white shadow-[0_0_20px_#06b6d4,0_0_35px_#8b5cf6] flex items-center justify-center z-20"
@@ -149,7 +257,7 @@ export const Projects: React.FC = () => {
               </motion.div>
             </div>
 
-            {/* Alternating Milestone Items along the Curved Spine */}
+            {/* Alternating Milestone Items */}
             <div className="space-y-12 sm:space-y-16 md:space-y-20">
               {filteredProjects.map((project: Project, index: number) => {
                 const isEven = index % 2 === 0;
@@ -159,84 +267,45 @@ export const Projects: React.FC = () => {
                     key={project.id}
                     className="relative flex flex-col md:flex-row items-center w-full"
                   >
-                    {/* Desktop Left-Side Card Column (Even Indices) */}
                     <div className={`w-full md:w-[calc(50%-44px)] pl-12 sm:pl-16 md:pl-0 ${isEven ? 'md:mr-auto' : 'md:hidden'}`}>
-                      {isEven && (
-                        <ProjectCard project={project} index={index} />
-                      )}
+                      {isEven && <ProjectCard project={project} index={index} />}
                     </div>
 
-                    {/* Central Spine Milestone Node (Desktop Center, Mobile Left) */}
                     <div className="absolute left-5 md:left-1/2 -translate-x-1/2 top-6 md:top-1/2 md:-translate-y-1/2 z-20 flex items-center justify-center">
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true, margin: "-40px" }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
-                        className="relative group cursor-pointer"
-                      >
-                        {/* Milestone Pill with Index Number */}
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl glass-card border border-violet-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.35)] group-hover:border-cyan-400 group-hover:scale-110 transition-all duration-300 bg-black/90">
-                          <span className="font-mono text-xs sm:text-sm font-extrabold text-white group-hover:text-cyan-300">
-                            {String(index + 1).padStart(2, '0')}
-                          </span>
-                        </div>
-
-                        {/* Outer Pulse Ring */}
-                        <div className="absolute -inset-1 rounded-2xl border border-dashed border-cyan-400/40 animate-spin-slow pointer-events-none"></div>
-                      </motion.div>
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl glass-card border border-violet-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.35)] bg-black/90">
+                        <span className="font-mono text-xs sm:text-sm font-extrabold text-white">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Desktop Right-Side Card Column (Odd Indices) */}
                     <div className={`w-full md:w-[calc(50%-44px)] pl-12 sm:pl-16 md:pl-0 ${!isEven ? 'md:ml-auto' : 'hidden md:block md:invisible'}`}>
-                      {!isEven && (
-                        <ProjectCard project={project} index={index} />
-                      )}
+                      {!isEven && <ProjectCard project={project} index={index} />}
                     </div>
 
-                    {/* Mobile Only: Render even cards with offset padding */}
                     <div className="w-full md:hidden pl-12 sm:pl-16">
-                      {!isEven && (
-                        <ProjectCard project={project} index={index} />
-                      )}
+                      {!isEven && <ProjectCard project={project} index={index} />}
                     </div>
-
                   </div>
                 );
               })}
             </div>
-
-            {/* Bottom Timeline Milestone Cap */}
-            <div className="relative flex justify-center mt-12 sm:mt-16 z-20">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-violet-500/40 text-xs font-mono text-slate-300 shadow-[0_0_20px_rgba(139,92,246,0.25)]">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Verified Repositories Milestone Timeline</span>
-              </div>
-            </div>
-
           </div>
-        ) : (
-          /* ======================================================== */
-          /* VIEW 2: 3D CARD GRID VIEW                                */
-          /* ======================================================== */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project: Project, index: number) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </div>
-        )}
+        </div>
+      )}
 
-        {/* Note on Authenticity with Translucent Glass */}
+      {/* Note on Authenticity with Translucent Glass */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-14 p-4 rounded-2xl glass-panel text-center text-xs text-slate-400 font-mono"
+          className="p-4 rounded-2xl glass-panel text-center text-xs text-slate-400 font-mono"
         >
           <span>🔒 All codebases are authenticated with <span className="text-cyan-400 font-semibold">@{personalInfo.githubUsername}</span> on GitHub. Live Demo buttons are rendered strictly when active production deployments exist.</span>
         </motion.div>
-
       </div>
+
     </section>
   );
 };
