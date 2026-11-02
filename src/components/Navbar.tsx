@@ -48,7 +48,7 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#030407]/80 backdrop-blur-2xl border-b border-white/[0.08] py-3.5 sm:py-4 shadow-2xl shadow-black/80'
+          ? 'bg-black/75 backdrop-blur-2xl border-b border-white/[0.08] py-3.5 sm:py-4 shadow-2xl shadow-black/80'
           : 'bg-transparent py-4 sm:py-6'
       }`}
     >
@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Menu (<1024px) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-white/10 bg-[#030407]/95 backdrop-blur-3xl px-5 pt-3 pb-8 animate-fadeIn mt-2 shadow-2xl">
+        <div className="lg:hidden border-b border-white/10 bg-black/95 backdrop-blur-3xl px-5 pt-3 pb-8 animate-fadeIn mt-2 shadow-2xl">
           <nav className="flex flex-col gap-1.5 mb-6">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');

@@ -94,7 +94,7 @@ export const Projects: React.FC = () => {
   const photonY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="projects" className="py-20 md:py-28 relative bg-transparent overflow-hidden">
+    <section id="projects" className="py-20 md:py-28 relative bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

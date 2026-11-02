@@ -104,7 +104,7 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-[92vh] flex items-center pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-transparent">
+    <section ref={heroRef} id="home" className="relative min-h-[92vh] flex items-center pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           

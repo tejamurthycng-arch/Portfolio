@@ -6,11 +6,11 @@ import {
   Code2, 
   BrainCircuit, 
   MapPin, 
-  Sparkles, 
-  ArrowRight, 
-  User, 
-  Compass, 
-  Rocket 
+  Sparkles,
+  ArrowRight,
+  User,
+  Compass,
+  Rocket
 } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
 import { SectionHeading } from '../components/SectionHeading';
@@ -193,7 +193,7 @@ export const About: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="py-20 md:py-24 relative bg-transparent">
+    <section ref={sectionRef} id="about" className="py-20 md:py-24 relative bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading
