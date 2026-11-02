@@ -13,7 +13,7 @@ const navItems: NavItem[] = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Hackathons & Experience', href: '#experience' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -48,35 +48,35 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-navy-950/90 backdrop-blur-xl border-b border-red-500/20 py-4 shadow-xl shadow-black/40'
-          : 'bg-transparent py-6'
+          ? 'bg-navy-950/90 backdrop-blur-xl border-b border-red-500/20 py-3.5 sm:py-4 shadow-xl shadow-black/40'
+          : 'bg-transparent py-4 sm:py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Larger Logo / Monogram */}
+          {/* Logo / Monogram */}
           <a
             href="#home"
-            className="group flex items-center gap-3 text-white font-display text-xl sm:text-2xl font-bold tracking-wider"
+            className="group flex items-center gap-2.5 sm:gap-3 text-white font-display text-lg sm:text-2xl font-bold tracking-wider"
           >
-            <div className="w-12 h-12 rounded-2xl bg-navy-900 border-2 border-red-500/40 flex items-center justify-center text-crimson-DEFAULT group-hover:border-crimson-DEFAULT group-hover:shadow-crimson group-hover:scale-105 transition-all duration-300 shadow-md">
-              <span className="font-mono text-base font-extrabold text-white group-hover:text-crimson-DEFAULT">TM</span>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-navy-900 border-2 border-red-500/40 flex items-center justify-center text-crimson-DEFAULT group-hover:border-crimson-DEFAULT group-hover:shadow-crimson group-hover:scale-105 transition-all duration-300 shadow-md">
+              <span className="font-mono text-sm sm:text-base font-extrabold text-white group-hover:text-crimson-DEFAULT">TM</span>
             </div>
-            <span className="hidden sm:inline-block font-sans font-bold tracking-tight text-white group-hover:text-crimson-DEFAULT transition-colors">
+            <span className="font-sans font-bold tracking-tight text-white group-hover:text-crimson-DEFAULT transition-colors">
               Tejamurthy<span className="text-crimson-DEFAULT">.dev</span>
             </span>
           </a>
 
-          {/* Larger Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-1.5 bg-navy-900/80 border border-slate-800/90 px-5 py-2 rounded-full backdrop-blur-md shadow-lg shadow-black/20">
+          {/* Desktop Navigation for Laptops & Desktops (lg: 1024px+) */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 bg-navy-900/80 border border-slate-800/90 px-3.5 xl:px-5 py-1.5 xl:py-2 rounded-full backdrop-blur-md shadow-lg shadow-black/20">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
               return (
                 <a
                   key={item.label}
                   href={item.href}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`px-3 xl:px-4 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium transition-all duration-200 ${
                     isActive
                       ? 'bg-red-500/20 text-white shadow-sm border border-red-500/40 font-semibold'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
@@ -88,24 +88,24 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Action: Larger Resume Button */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Right Action: Resume Button for Laptops & Desktops */}
+          <div className="hidden lg:flex items-center gap-3">
             <Button
               href={personalInfo.resumeUrl}
               external
               variant="primary"
               size="md"
               icon={<ExternalLink className="w-4 h-4" />}
-              className="text-sm px-6 py-2.5 font-semibold"
+              className="text-xs xl:text-sm px-4 xl:px-6 py-2 xl:py-2.5 font-semibold"
             >
               Resume
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile & Tablet Menu Hamburger Button (<1024px) */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-3 rounded-2xl bg-navy-900 border border-slate-800 text-slate-300 hover:text-white hover:border-red-500/40"
+            className="lg:hidden p-2.5 rounded-xl bg-navy-900 border border-slate-800 text-slate-300 hover:text-white hover:border-red-500/40 transition-colors"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6 text-crimson-DEFAULT" /> : <Menu className="w-6 h-6" />}
@@ -113,10 +113,10 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu (<1024px) */}
       {mobileMenuOpen && (
-        <div className="xl:hidden border-b border-slate-800 bg-navy-950/98 backdrop-blur-2xl px-5 pt-4 pb-8 animate-fadeIn mt-2">
-          <nav className="flex flex-col gap-2 mb-6">
+        <div className="lg:hidden border-b border-slate-800 bg-navy-950/98 backdrop-blur-2xl px-5 pt-3 pb-8 animate-fadeIn mt-2">
+          <nav className="flex flex-col gap-1.5 mb-6">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
               return (
@@ -124,7 +124,7 @@ export const Navbar: React.FC = () => {
                   key={item.label}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-5 py-3 rounded-xl text-base font-medium transition-all ${
+                  className={`px-4 py-3 rounded-xl text-base font-medium transition-all ${
                     isActive
                       ? 'bg-red-950/60 text-white border border-red-500/40 font-semibold'
                       : 'text-slate-300 hover:text-white hover:bg-navy-900'
@@ -142,7 +142,7 @@ export const Navbar: React.FC = () => {
             variant="primary"
             size="lg"
             icon={<FileDown className="w-5 h-5" />}
-            className="w-full justify-center text-base"
+            className="w-full justify-center text-base py-3"
           >
             View Official Resume
           </Button>

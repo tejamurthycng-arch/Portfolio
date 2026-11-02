@@ -187,7 +187,7 @@ export const Contact: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Jane Doe"
-                      className="w-full px-4 py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-sm placeholder:text-slate-600 outline-none transition-all"
+                      className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
                     />
                   </div>
 
@@ -201,7 +201,7 @@ export const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="jane@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-sm placeholder:text-slate-600 outline-none transition-all"
+                      className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -215,7 +215,7 @@ export const Contact: React.FC = () => {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     placeholder="Project Inquiry / Opportunity"
-                    className="w-full px-4 py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-sm placeholder:text-slate-600 outline-none transition-all"
+                    className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all"
                   />
                 </div>
 
@@ -229,7 +229,7 @@ export const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Hi Tejamurthy, I came across your work and would love to connect regarding..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-sm placeholder:text-slate-600 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 sm:py-2.5 rounded-xl bg-navy-950 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white text-base sm:text-sm placeholder:text-slate-600 outline-none transition-all resize-none"
                   ></textarea>
                 </div>
 
