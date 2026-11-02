@@ -12,9 +12,9 @@ import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-navy-950 text-slate-100 flex flex-col selection:bg-electric selection:text-navy-950">
-      {/* Top ambient glow lights */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-7xl h-40 bg-gradient-to-b from-cyan-500/10 to-transparent blur-3xl pointer-events-none z-0"></div>
+    <div className="relative min-h-screen bg-navy-950 text-slate-100 flex flex-col selection:bg-red-600 selection:text-white">
+      {/* Top ambient glow light in Crimson Red */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-7xl h-48 bg-gradient-to-b from-red-600/15 via-rose-500/5 to-transparent blur-3xl pointer-events-none z-0"></div>
 
       <Navbar />
 

@@ -38,7 +38,7 @@ export const Projects: React.FC = () => {
             external
             variant="outline"
             size="sm"
-            icon={<Github className="w-4 h-4 text-cyan-400" />}
+            icon={<Github className="w-4 h-4 text-rose-400" />}
             className="w-fit"
           >
             Explore All on GitHub
@@ -48,7 +48,7 @@ export const Projects: React.FC = () => {
         {/* Filter Navigation */}
         <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-slate-800">
           <div className="flex items-center gap-2 mr-2 text-xs font-mono text-slate-500">
-            <Filter className="w-3.5 h-3.5 text-cyan-400" />
+            <Filter className="w-3.5 h-3.5 text-rose-400" />
             <span>Filter:</span>
           </div>
 
@@ -58,13 +58,13 @@ export const Projects: React.FC = () => {
               onClick={() => setActiveFilter(tab.id as typeof activeFilter)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 flex items-center gap-2 ${
                 activeFilter === tab.id
-                  ? 'bg-electric text-navy-950 font-bold shadow-electric-sm'
+                  ? 'bg-red-600 text-white font-bold shadow-crimson-sm'
                   : 'bg-navy-900/60 text-slate-300 hover:text-white hover:bg-navy-850 border border-slate-800'
               }`}
             >
               <span>{tab.label}</span>
               <span className={`text-[10px] px-1.5 py-0.2 rounded ${
-                activeFilter === tab.id ? 'bg-navy-950/20 text-navy-950 font-bold' : 'bg-navy-800 text-slate-400'
+                activeFilter === tab.id ? 'bg-navy-950/30 text-white font-bold' : 'bg-navy-800 text-slate-400'
               }`}>
                 {tab.count}
               </span>
@@ -81,7 +81,7 @@ export const Projects: React.FC = () => {
 
         {/* Note on Authenticity */}
         <div className="mt-12 p-4 rounded-xl bg-navy-900/40 border border-slate-800 text-center text-xs text-slate-400 font-mono">
-          <span>🔒 All codebases are authenticated with <span className="text-cyan-400 font-semibold">@{personalInfo.githubUsername}</span> on GitHub. Live Demo buttons are rendered strictly when active production deployments exist.</span>
+          <span>🔒 All codebases are authenticated with <span className="text-rose-400 font-semibold">@{personalInfo.githubUsername}</span> on GitHub. Live Demo buttons are rendered strictly when active production deployments exist.</span>
         </div>
 
       </div>

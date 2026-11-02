@@ -5,11 +5,11 @@ import { SectionHeading } from '../components/SectionHeading';
 import { Code, Layout, Server, Database, Wrench } from 'lucide-react';
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  languages: <Code className="w-4 h-4 text-cyan-400" />,
-  frontend: <Layout className="w-4 h-4 text-cyan-400" />,
-  backend: <Server className="w-4 h-4 text-cyan-400" />,
-  database: <Database className="w-4 h-4 text-cyan-400" />,
-  tools: <Wrench className="w-4 h-4 text-cyan-400" />,
+  languages: <Code className="w-4 h-4 text-rose-400" />,
+  frontend: <Layout className="w-4 h-4 text-rose-400" />,
+  backend: <Server className="w-4 h-4 text-rose-400" />,
+  database: <Database className="w-4 h-4 text-rose-400" />,
+  tools: <Wrench className="w-4 h-4 text-rose-400" />,
 };
 
 export const Skills: React.FC = () => {
@@ -25,8 +25,8 @@ export const Skills: React.FC = () => {
         
         <SectionHeading
           badge="// 02. TECHNICAL SKILLS"
-          title="Verified Core Competencies"
-          subtitle="A structured overview of the programming languages, full-stack technologies, databases, and developer tools in my active technical repertoire."
+          title="Core Technical Repertoire"
+          subtitle="Authentic tech stack featuring programming languages, frontend libraries, backend runtimes, databases, and version control tools."
         />
 
         {/* Category Filter Tabs */}
@@ -35,11 +35,11 @@ export const Skills: React.FC = () => {
             onClick={() => setActiveCategory('all')}
             className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-200 ${
               activeCategory === 'all'
-                ? 'bg-electric text-navy-950 font-bold shadow-electric-sm'
+                ? 'bg-red-600 text-white font-bold shadow-crimson-sm'
                 : 'bg-navy-900/60 text-slate-300 hover:text-white hover:bg-navy-850 border border-slate-800'
             }`}
           >
-            All Categories ({skillCategories.reduce((acc, c) => acc + c.skills.length, 0)})
+            All Technologies ({skillCategories.reduce((acc, c) => acc + c.skills.length, 0)})
           </button>
 
           {skillCategories.map((category) => (
@@ -48,7 +48,7 @@ export const Skills: React.FC = () => {
               onClick={() => setActiveCategory(category.id)}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono transition-all duration-200 ${
                 activeCategory === category.id
-                  ? 'bg-cyan-500/20 text-electric font-semibold border border-cyan-500/40 shadow-sm'
+                  ? 'bg-red-500/20 text-rose-300 font-semibold border border-red-500/40 shadow-sm'
                   : 'bg-navy-900/40 text-slate-400 hover:text-slate-200 hover:bg-navy-850 border border-slate-800/80'
               }`}
             >
@@ -68,7 +68,7 @@ export const Skills: React.FC = () => {
               
               {/* Category Subheading */}
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-navy-900 border border-cyan-500/20">
+                <div className="p-2.5 rounded-xl bg-navy-900 border border-red-500/25">
                   {categoryIcons[category.id]}
                 </div>
                 <div>
@@ -82,7 +82,7 @@ export const Skills: React.FC = () => {
               </div>
 
               {/* Grid of Skill Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {category.skills.map((skill) => (
                   <SkillCard key={skill.name} skill={skill} />
                 ))}

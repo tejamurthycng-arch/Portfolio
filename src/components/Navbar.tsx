@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
 
       // Section spy
       const sections = ['home', 'about', 'skills', 'projects', 'experience', 'education', 'contact'];
-      const scrollPosition = window.scrollY + 120;
+      const scrollPosition = window.scrollY + 140;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -48,37 +48,38 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-navy-950/85 backdrop-blur-md border-b border-cyan-500/15 py-3 shadow-lg shadow-black/20'
-          : 'bg-transparent py-5'
+          ? 'bg-navy-950/90 backdrop-blur-xl border-b border-red-500/20 py-4 shadow-xl shadow-black/40'
+          : 'bg-transparent py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo / Monogram */}
+          
+          {/* Larger Logo / Monogram */}
           <a
             href="#home"
-            className="group flex items-center gap-2 text-white font-display text-xl font-bold tracking-wider"
+            className="group flex items-center gap-3 text-white font-display text-xl sm:text-2xl font-bold tracking-wider"
           >
-            <div className="w-10 h-10 rounded-xl bg-navy-900 border border-cyan-500/30 flex items-center justify-center text-electric group-hover:border-electric group-hover:shadow-electric-sm transition-all duration-300">
-              <span className="font-mono text-sm font-extrabold text-cyan-400 group-hover:text-electric">TM</span>
+            <div className="w-12 h-12 rounded-2xl bg-navy-900 border-2 border-red-500/40 flex items-center justify-center text-crimson-DEFAULT group-hover:border-crimson-DEFAULT group-hover:shadow-crimson group-hover:scale-105 transition-all duration-300 shadow-md">
+              <span className="font-mono text-base font-extrabold text-white group-hover:text-crimson-DEFAULT">TM</span>
             </div>
-            <span className="hidden sm:inline-block font-sans font-bold tracking-tight text-slate-100 group-hover:text-electric transition-colors">
-              Tejamurthy<span className="text-electric">.dev</span>
+            <span className="hidden sm:inline-block font-sans font-bold tracking-tight text-white group-hover:text-crimson-DEFAULT transition-colors">
+              Tejamurthy<span className="text-crimson-DEFAULT">.dev</span>
             </span>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 bg-navy-900/60 border border-slate-800/80 px-4 py-1.5 rounded-full backdrop-blur-sm">
+          {/* Larger Desktop Navigation */}
+          <nav className="hidden xl:flex items-center gap-1.5 bg-navy-900/80 border border-slate-800/90 px-5 py-2 rounded-full backdrop-blur-md shadow-lg shadow-black/20">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
               return (
                 <a
                   key={item.label}
                   href={item.href}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? 'bg-cyan-500/15 text-electric shadow-sm border border-cyan-500/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/40'
+                      ? 'bg-red-500/20 text-white shadow-sm border border-red-500/40 font-semibold'
+                      : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                   }`}
                 >
                   {item.label}
@@ -87,15 +88,15 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Action: Resume */}
+          {/* Right Action: Larger Resume Button */}
           <div className="hidden sm:flex items-center gap-3">
             <Button
               href={personalInfo.resumeUrl}
               external
-              variant="outline"
-              size="sm"
-              icon={<ExternalLink className="w-3.5 h-3.5 text-cyan-400" />}
-              className="text-xs"
+              variant="primary"
+              size="md"
+              icon={<ExternalLink className="w-4 h-4" />}
+              className="text-sm px-6 py-2.5 font-semibold"
             >
               Resume
             </Button>
@@ -104,18 +105,18 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-navy-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cyan-500/30"
+            className="xl:hidden p-3 rounded-2xl bg-navy-900 border border-slate-800 text-slate-300 hover:text-white hover:border-red-500/40"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 text-electric" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-6 h-6 text-crimson-DEFAULT" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-slate-800 bg-navy-950/95 backdrop-blur-xl px-4 pt-3 pb-6 animate-fadeIn">
-          <nav className="flex flex-col gap-1.5 mb-5">
+        <div className="xl:hidden border-b border-slate-800 bg-navy-950/98 backdrop-blur-2xl px-5 pt-4 pb-8 animate-fadeIn mt-2">
+          <nav className="flex flex-col gap-2 mb-6">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
               return (
@@ -123,9 +124,9 @@ export const Navbar: React.FC = () => {
                   key={item.label}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  className={`px-5 py-3 rounded-xl text-base font-medium transition-all ${
                     isActive
-                      ? 'bg-cyan-950/50 text-electric border border-cyan-500/30'
+                      ? 'bg-red-950/60 text-white border border-red-500/40 font-semibold'
                       : 'text-slate-300 hover:text-white hover:bg-navy-900'
                   }`}
                 >
@@ -139,9 +140,9 @@ export const Navbar: React.FC = () => {
             href={personalInfo.resumeUrl}
             external
             variant="primary"
-            size="md"
-            icon={<FileDown className="w-4 h-4" />}
-            className="w-full justify-center"
+            size="lg"
+            icon={<FileDown className="w-5 h-5" />}
+            className="w-full justify-center text-base"
           >
             View Official Resume
           </Button>

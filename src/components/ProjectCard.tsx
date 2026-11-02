@@ -14,30 +14,30 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const hasGithub = Boolean(project.githubUrl && project.githubUrl.trim().length > 0);
 
   return (
-    <div className="group relative flex flex-col justify-between h-full rounded-2xl bg-navy-900/70 border border-slate-800 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-electric-sm overflow-hidden p-6 backdrop-blur-sm">
-      {/* Subtle top electric gradient border highlight on hover */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    <div className="group relative flex flex-col justify-between h-full rounded-2xl bg-navy-900/80 border border-slate-800 hover:border-red-500/50 transition-all duration-300 hover:shadow-crimson-sm overflow-hidden p-6 sm:p-7 backdrop-blur-sm">
+      {/* Subtle top crimson highlight on hover */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
       <div>
         {/* Header badges */}
         <div className="flex items-center justify-between gap-2 mb-4">
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-lg bg-navy-800 text-electric border border-cyan-500/20">
+            <span className="p-2 rounded-lg bg-navy-800 text-rose-400 border border-red-500/25">
               <Code className="w-4 h-4" />
             </span>
-            <span className="text-xs font-mono text-cyan-400/80 bg-cyan-950/40 px-2.5 py-0.5 rounded-full border border-cyan-500/20">
+            <span className="text-xs font-mono text-rose-300 bg-red-950/50 px-2.5 py-0.5 rounded-full border border-red-500/25">
               {project.repoName}
             </span>
           </div>
           {project.featured && (
-            <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-electric/10 text-electric border border-electric/30">
+            <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-red-500/15 text-rose-300 border border-red-500/40">
               Featured
             </span>
           )}
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-electric transition-colors duration-200">
+        <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-rose-400 transition-colors duration-200">
           {project.name}
         </h3>
 
@@ -51,7 +51,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="mb-5 space-y-1.5 pt-2 border-t border-slate-800/80">
             {project.highlights.map((highlight, idx) => (
               <div key={idx} className="flex items-start gap-2 text-xs text-slate-400">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 mt-0.5 flex-shrink-0" />
                 <span>{highlight}</span>
               </div>
             ))}
@@ -65,7 +65,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="text-xs font-mono px-2.5 py-1 rounded-md bg-navy-800/80 text-slate-300 border border-slate-700/60"
+              className="text-xs font-mono px-2.5 py-1 rounded-md bg-navy-800/90 text-slate-300 border border-slate-700/60"
             >
               {tech}
             </span>

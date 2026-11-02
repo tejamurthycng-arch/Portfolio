@@ -16,7 +16,7 @@ export interface HackathonExperience {
   themeOrProblem?: string;
   teamInfo?: string;
   learningDescription: string; // Professional 2-line description of what was learned
-  certificatePdfUrl?: string; // e.g., '/certificates/hackathon-cert.pdf'
+  certificatePdfUrl?: string; // e.g., '/certificates/the-beginner-hackathon.pdf'
   certificateThumbnail?: string;
   verified: boolean;
   tags: string[];
@@ -24,29 +24,24 @@ export interface HackathonExperience {
 
 /**
  * Verified Hackathons & Experience List
- * IMPORTANT: This data strictly mirrors verified events & uploaded certificates.
- * When you upload a new certificate PDF into `public/certificates/`, add the entry here.
+ * Accurately updated with Tejamurthy's verified participation certificate:
+ * "The Beginner Hackathon" - March 5, 2026, Protocol Club, BMSCE.
  */
 export const hackathonsAndExperience: HackathonExperience[] = [
-  /* 
-   * Ready for Tejamurthy's uploaded PDF certificates!
-   * Examples of the verified schema format:
-   * {
-   *   id: 'hackathon-1',
-   *   type: 'hackathon',
-   *   title: 'Smart City Hackathon',
-   *   organizer: 'BMSCE Innovation Hub',
-   *   dateOrYear: '2025',
-   *   participationStatus: 'Participant',
-   *   eventCategory: 'Civic Tech & AI',
-   *   themeOrProblem: 'Urban infrastructure sensing and hazard reporting',
-   *   learningDescription: 'Explored real-time sensor processing and rapid prototype development under tight sprint constraints.\nGained hands-on experience in cross-functional ideation and pitching engineering solutions.',
-   *   certificatePdfUrl: '/certificates/smart-city-hackathon.pdf',
-   *   verified: true,
-   *   tags: ['Civic Tech', 'YOLOv8', 'Rapid Prototyping']
-   * }
-   */
+  {
+    id: 'the-beginner-hackathon-2026',
+    type: 'hackathon',
+    title: 'The Beginner Hackathon',
+    organizer: 'Protocol Club, Department of CSE, BMSCE',
+    dateOrYear: 'March 5, 2026',
+    participationStatus: 'Participant',
+    eventCategory: 'Hackathon & Rapid Prototyping',
+    themeOrProblem: 'Algorithmic problem solving, teamwork, and software innovation under timed sprint constraints',
+    learningDescription: 'Collaborated with peers in an intensive sprint hosted by BMSCE\'s Protocol Club to brainstorm and prototype functional software under time limits.\nStrengthened hands-on technical development workflows, team synergy, and rapid problem decomposition.',
+    certificatePdfUrl: '/certificates/the-beginner-hackathon.pdf',
+    verified: true,
+    tags: ['Protocol Club', 'BMSCE CSE', 'Rapid Prototyping', 'Teamwork', 'Algorithms']
+  }
 ];
 
-// Helper to determine if there are currently verified hackathons or if awaiting certificate uploads
 export const hasVerifiedHackathons = hackathonsAndExperience.length > 0;

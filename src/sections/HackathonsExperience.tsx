@@ -18,7 +18,7 @@ export const HackathonsExperience: React.FC = () => {
         <SectionHeading
           badge="// 04. VERIFIED EXPERIENCES"
           title="Hackathons & Experience"
-          subtitle="A dedicated timeline of verified technical hackathons, workshops, and engineering experiences backed by participation credentials."
+          subtitle="Documented timeline of technical hackathons, coding sprints, and engineering experiences backed by verified participation credentials."
         />
 
         {/* Experience Category Tabs */}
@@ -36,7 +36,7 @@ export const HackathonsExperience: React.FC = () => {
               onClick={() => setSelectedType(tab.id)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 ${
                 selectedType === tab.id
-                  ? 'bg-electric text-navy-950 font-bold shadow-electric-sm'
+                  ? 'bg-red-600 text-white font-bold shadow-crimson-sm'
                   : 'bg-navy-900/60 text-slate-300 hover:text-white hover:bg-navy-850 border border-slate-800'
               }`}
             >
@@ -55,7 +55,7 @@ export const HackathonsExperience: React.FC = () => {
         ) : (
           /* Certificate Pipeline & Ready-to-Verify State */
           <div className="rounded-2xl bg-navy-900/50 border border-slate-800 p-8 md:p-12 backdrop-blur-sm text-center max-w-3xl mx-auto">
-            <div className="w-16 h-16 rounded-2xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-electric mx-auto mb-5 shadow-electric-sm">
+            <div className="w-16 h-16 rounded-2xl bg-red-950/60 border border-red-500/30 flex items-center justify-center text-rose-400 mx-auto mb-5 shadow-crimson-sm">
               <Award className="w-8 h-8" />
             </div>
 
@@ -69,17 +69,17 @@ export const HackathonsExperience: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left mb-8 max-w-2xl mx-auto">
               <div className="p-4 rounded-xl bg-navy-950/60 border border-slate-800">
-                <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold mb-1.5">
+                <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-semibold mb-1.5">
                   <FileText className="w-4 h-4" />
                   <span>1. Upload PDF</span>
                 </div>
                 <p className="text-xs text-slate-400">
-                  Save your certificate PDF into <code className="text-cyan-300">public/certificates/</code>.
+                  Save your certificate PDF into <code className="text-rose-300">public/certificates/</code>.
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-navy-950/60 border border-slate-800">
-                <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold mb-1.5">
+                <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-semibold mb-1.5">
                   <ShieldCheck className="w-4 h-4" />
                   <span>2. Verify Metadata</span>
                 </div>
@@ -89,7 +89,7 @@ export const HackathonsExperience: React.FC = () => {
               </div>
 
               <div className="p-4 rounded-xl bg-navy-950/60 border border-slate-800">
-                <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold mb-1.5">
+                <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-semibold mb-1.5">
                   <Sparkles className="w-4 h-4" />
                   <span>3. Render Card</span>
                 </div>
@@ -99,8 +99,8 @@ export const HackathonsExperience: React.FC = () => {
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-navy-900 border border-cyan-500/20 text-xs font-mono text-cyan-300">
-              <CheckCircle2 className="w-4 h-4 text-electric" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-navy-900 border border-red-500/20 text-xs font-mono text-rose-300">
+              <CheckCircle2 className="w-4 h-4 text-red-500" />
               <span>Configurable in <code>src/data/hackathons.ts</code></span>
             </div>
           </div>
