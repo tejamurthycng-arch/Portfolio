@@ -27,12 +27,12 @@ export const AnimatedBackground: React.FC = () => {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Mouse / Pointer interaction state
+    // Pointer / Cursor state
     const mouse = {
       x: -9999,
       y: -9999,
       active: false,
-      radius: 135,
+      radius: 130,
     };
 
     let mouseTimeout: ReturnType<typeof setTimeout>;
@@ -43,10 +43,9 @@ export const AnimatedBackground: React.FC = () => {
       mouse.active = true;
 
       clearTimeout(mouseTimeout);
-      // Particle disturbance settles into resting position when mouse stops moving
       mouseTimeout = setTimeout(() => {
         mouse.active = false;
-      }, 3000);
+      }, 2500);
     };
 
     const handleMouseLeave = () => {
@@ -74,25 +73,26 @@ export const AnimatedBackground: React.FC = () => {
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
-    // Track scroll velocity for rapid scroll-reactive motion
+    // Track scroll velocity for shooting star tails & movement
     let lastScrollY = window.scrollY;
+    let smoothedScrollVy = 0;
 
     // Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Initialize tiny white particles
+    // Particle field
     let particles: Particle[] = [];
 
     const initParticles = () => {
-      // Density calculation: ~400 on 1080p desktop, scaled gracefully on smaller screens
-      const count = Math.min(Math.floor((width * height) / 3800), 460);
+      const count = Math.min(Math.floor((width * height) / 3400), 480);
       particles = [];
 
       for (let i = 0; i < count; i++) {
-        // Varying speeds for deep 3D multi-plane parallax response
-        const speedMult = Math.random() * 2.2 + 1.2; // 1.2x to 3.4x rapid scroll travel
-        const radius = Math.random() * 1.3 + 0.75;  // 0.75px to 2.05px tiny white particles
-        const baseAlpha = Math.random() * 0.55 + 0.35; // 0.35 to 0.90 subtle starlight glow
+        // Multi-tier depth velocity multipliers for shooting star parallax
+        const speedMult = Math.random() * 2.0 + 1.2; 
+        // Tiny particles: strictly 0.65px to 1.25px (never enlarged on hover)
+        const radius = Math.random() * 0.6 + 0.65;
+        const baseAlpha = Math.random() * 0.55 + 0.35;
 
         particles.push({
           baseX: Math.random() * width,
@@ -118,7 +118,7 @@ export const AnimatedBackground: React.FC = () => {
     window.addEventListener('resize', handleResize, { passive: true });
     initParticles();
 
-    // If user prefers reduced motion, draw static particles and halt render loop
+    // Static fallback for prefers-reduced-motion
     if (prefersReducedMotion) {
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, width, height);
@@ -142,43 +142,50 @@ export const AnimatedBackground: React.FC = () => {
     // MAIN 60 FPS ANIMATION LOOP
     // -------------------------------------------------------------
     const render = () => {
-      // 1. Calculate Instantaneous Scroll Delta
+      // 1. Instantaneous scroll delta & smooth velocity damping
       const currentScrollY = window.scrollY;
-      const deltaY = currentScrollY - lastScrollY;
+      const rawDeltaY = currentScrollY - lastScrollY;
       lastScrollY = currentScrollY;
 
-      // 2. Clear Canvas with Pure Black
+      // Smooth decay for aerodynamic shooting star tails
+      smoothedScrollVy += (rawDeltaY - smoothedScrollVy) * 0.35;
+      if (Math.abs(smoothedScrollVy) < 0.05 && rawDeltaY === 0) {
+        smoothedScrollVy = 0;
+      }
+
+      // 2. Clear Canvas with Pure Pitch Black (#000000)
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, width, height);
 
-      // Track particles currently in contact with cursor radius for motion graphics
+      // Track particles within cursor influence radius for motion graphic effects
       const disturbedParticles: Particle[] = [];
 
-      // 3. Update & Move Particles
+      // 3. Update & Draw Particles with Shooting Star Tails
       const particleLen = particles.length;
       for (let i = 0; i < particleLen; i++) {
         const p = particles[i];
 
         // SCROLL REACTION:
-        // Rapidly moves along with scroll direction.
-        // When user stops scrolling (deltaY === 0), particles remain completely still at their position!
-        if (deltaY !== 0) {
-          p.baseY -= deltaY * p.speedMult;
+        // Rapidly moves along scroll direction.
+        // When not scrolling (rawDeltaY === 0 && smoothedScrollVy === 0), particles stay 100% still!
+        if (rawDeltaY !== 0) {
+          p.baseY -= rawDeltaY * p.speedMult;
 
-          // Seamless screen wrapping
-          if (p.baseY < -12) {
-            p.baseY += height + 24;
+          // Seamless edge wrapping
+          if (p.baseY < -15) {
+            p.baseY += height + 30;
             p.baseX = Math.random() * width;
-          } else if (p.baseY > height + 12) {
-            p.baseY -= (height + 24);
+          } else if (p.baseY > height + 15) {
+            p.baseY -= (height + 30);
             p.baseX = Math.random() * width;
           }
         }
 
         // CURSOR DISTURBANCE:
-        // If cursor moves into contact or within radius, disturb particles with fluid spring impulse
+        // Fluid spring impulse displacing particles WITHOUT increasing their size
         const currentX = p.baseX + p.offsetX;
         const currentY = p.baseY + p.offsetY;
+        let isDisturbed = false;
 
         if (mouse.active) {
           const dx = currentX - mouse.x;
@@ -191,19 +198,19 @@ export const AnimatedBackground: React.FC = () => {
             const nx = dx / dist;
             const ny = dy / dist;
 
-            // Elastic disturbance impulse: stronger closer to cursor
-            const force = Math.pow(1 - dist / mouse.radius, 1.7);
-            const pushVelocity = force * 14;
+            // Non-linear spring push
+            const force = Math.pow(1 - dist / mouse.radius, 1.8);
+            const pushVelocity = force * 12;
 
             p.vx += nx * pushVelocity;
             p.vy += ny * pushVelocity;
 
+            isDisturbed = true;
             disturbedParticles.push(p);
           }
         }
 
-        // SPRING DAMPING PHYSICS:
-        // Disturbed particles smoothly settle back to their resting position (0, 0 offset)
+        // SPRING DAMPING: Particles smoothly return to (0, 0) resting offset
         p.offsetX += p.vx;
         p.offsetY += p.vy;
 
@@ -226,22 +233,58 @@ export const AnimatedBackground: React.FC = () => {
           p.vy = 0;
         }
 
-        // 4. Draw Regular Tiny White Particle
+        const renderX = p.baseX + p.offsetX;
+        const renderY = p.baseY + p.offsetY;
+
+        // -------------------------------------------------------------
+        // SHOOTING STAR THIN TAIL:
+        // Appears dynamically in the direction of scrolling velocity
+        // -------------------------------------------------------------
+        const scrollVy = -smoothedScrollVy * p.speedMult;
+        const effectiveVy = scrollVy + p.vy;
+        const effectiveVx = p.vx;
+        const totalSpeed = Math.hypot(effectiveVx, effectiveVy);
+
+        // When moving fast (e.g. during scroll or disturbance), draw a razor-thin shooting star tail
+        if (totalSpeed > 1.0) {
+          const tailLength = Math.min(totalSpeed * 1.6, 42);
+          const tailScale = tailLength / totalSpeed;
+
+          // Tail extends backwards opposite to the particle's motion vector
+          const tailX = renderX - effectiveVx * tailScale;
+          const tailY = renderY - effectiveVy * tailScale;
+
+          const tailGrad = ctx.createLinearGradient(renderX, renderY, tailX, tailY);
+          tailGrad.addColorStop(0, isDisturbed ? 'rgba(255, 255, 255, 0.95)' : `rgba(255, 255, 255, ${p.baseAlpha})`);
+          tailGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+          ctx.beginPath();
+          ctx.moveTo(renderX, renderY);
+          ctx.lineTo(tailX, tailY);
+          ctx.strokeStyle = tailGrad;
+          // Thin, sharp tail matching shooting star aesthetics
+          ctx.lineWidth = Math.min(p.radius * 0.85, 0.95);
+          ctx.stroke();
+        }
+
+        // -------------------------------------------------------------
+        // TINY WHITE PARTICLE (STRICT FIXED RADIUS: NO SIZE INCREASE)
+        // -------------------------------------------------------------
         ctx.beginPath();
-        ctx.arc(p.baseX + p.offsetX, p.baseY + p.offsetY, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.baseAlpha})`;
+        ctx.arc(renderX, renderY, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = isDisturbed ? '#ffffff' : `rgba(255, 255, 255, ${p.baseAlpha})`;
         ctx.fill();
       }
 
       // -------------------------------------------------------------
-      // 5. MOTION GRAPHICS: Particles in Contact with Cursor
+      // 4. MOTION GRAPHICS: Delicate web & filaments for cursor contact
       // -------------------------------------------------------------
       const disturbedCount = disturbedParticles.length;
 
       if (disturbedCount > 0) {
-        // A. Subtle laser webbing between adjacent disturbed particles
+        // A. Delicate laser webbing between adjacent disturbed particles
         if (disturbedCount > 1) {
-          ctx.lineWidth = 0.75;
+          ctx.lineWidth = 0.65;
           for (let i = 0; i < disturbedCount; i++) {
             for (let j = i + 1; j < disturbedCount; j++) {
               const p1 = disturbedParticles[i];
@@ -252,8 +295,8 @@ export const AnimatedBackground: React.FC = () => {
               const y2 = p2.baseY + p2.offsetY;
 
               const d = Math.hypot(x2 - x1, y2 - y1);
-              if (d < 70) {
-                const lineAlpha = (1 - d / 70) * 0.42;
+              if (d < 65) {
+                const lineAlpha = (1 - d / 65) * 0.38;
                 ctx.strokeStyle = `rgba(255, 255, 255, ${lineAlpha})`;
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
@@ -264,7 +307,7 @@ export const AnimatedBackground: React.FC = () => {
           }
         }
 
-        // B. Delicate starlight filament connecting particles to cursor
+        // B. Subtle starlight filament connecting disturbed particles to cursor
         if (mouse.active) {
           for (let i = 0; i < disturbedCount; i++) {
             const p = disturbedParticles[i];
@@ -272,10 +315,10 @@ export const AnimatedBackground: React.FC = () => {
             const py = p.baseY + p.offsetY;
             const d = Math.hypot(px - mouse.x, py - mouse.y);
 
-            if (d < mouse.radius * 0.75) {
-              const filamentAlpha = (1 - d / (mouse.radius * 0.75)) * 0.35;
+            if (d < mouse.radius * 0.72) {
+              const filamentAlpha = (1 - d / (mouse.radius * 0.72)) * 0.28;
               ctx.strokeStyle = `rgba(255, 255, 255, ${filamentAlpha})`;
-              ctx.lineWidth = 0.6;
+              ctx.lineWidth = 0.55;
               ctx.beginPath();
               ctx.moveTo(mouse.x, mouse.y);
               ctx.lineTo(px, py);
@@ -283,40 +326,21 @@ export const AnimatedBackground: React.FC = () => {
             }
           }
         }
-
-        // C. Specular Halos on Disturbed Particles
-        for (let i = 0; i < disturbedCount; i++) {
-          const p = disturbedParticles[i];
-          const px = p.baseX + p.offsetX;
-          const py = p.baseY + p.offsetY;
-
-          // Outer soft glow
-          ctx.beginPath();
-          ctx.arc(px, py, p.radius * 2.6, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
-          ctx.fill();
-
-          // Intense core
-          ctx.beginPath();
-          ctx.arc(px, py, p.radius * 1.3, 0, Math.PI * 2);
-          ctx.fillStyle = '#ffffff';
-          ctx.fill();
-        }
       }
 
-      // D. Ambient Cursor Reticle Pulse (Subtle HUD accent)
+      // C. Ambient Cursor Reticle Accent
       if (mouse.active) {
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 20, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
-        ctx.lineWidth = 0.8;
+        ctx.arc(mouse.x, mouse.y, 18, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 0.75;
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, mouse.radius * 0.9, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
-        ctx.setLineDash([4, 6]);
-        ctx.lineWidth = 0.7;
+        ctx.arc(mouse.x, mouse.y, mouse.radius * 0.88, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+        ctx.setLineDash([3, 5]);
+        ctx.lineWidth = 0.65;
         ctx.stroke();
         ctx.setLineDash([]);
       }
@@ -339,7 +363,7 @@ export const AnimatedBackground: React.FC = () => {
 
   return (
     <div className="animated-bg-container" aria-hidden="true">
-      {/* 60 FPS Particle Canvas with Scroll Velocity & Cursor Motion Graphics */}
+      {/* 60 FPS Particle Canvas: Shooting Stars on Scroll + Disturbance Physics */}
       <canvas ref={canvasRef} className="animated-bg-canvas" />
 
       {/* Cinematic Edge Vignette */}
