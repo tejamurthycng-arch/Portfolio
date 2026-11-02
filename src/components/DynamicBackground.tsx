@@ -423,14 +423,9 @@ export const DynamicBackground: React.FC = () => {
 
   return (
     <>
-      {/* Background Container with Pitch Black Base */}
+      {/* Background Container with 100% Pure Pitch Black OLED Base */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-black">
-        {/* Soft subtle atmospheric gradient glows tailored to electric violet & aurora cyan */}
-        <div className="absolute top-[-15%] left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-violet-600/[0.08] via-indigo-950/[0.04] to-transparent blur-[160px]"></div>
-        <div className="absolute bottom-[5%] right-[5%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-tl from-cyan-600/[0.06] via-transparent to-transparent blur-[160px]"></div>
-        <div className="absolute top-[40%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-tr from-fuchsia-600/[0.04] to-transparent blur-[140px]"></div>
-
-        {/* 60 FPS Canvas rendering active background mode */}
+        {/* 60 FPS Canvas rendering active background mode over pure black */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full opacity-95"

@@ -40,12 +40,6 @@ export const TechMarquee: React.FC = () => {
 
   return (
     <section className="relative py-10 sm:py-14 overflow-hidden bg-black border-y border-white/[0.06]">
-      {/* Background Ambient Glow Ribbon */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[35vw] h-24 bg-violet-600/[0.08] blur-[70px]"></div>
-        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[35vw] h-24 bg-cyan-600/[0.08] blur-[70px]"></div>
-      </div>
-
       {/* Left and Right Fade Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-20 pointer-events-none"></div>
       <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-20 pointer-events-none"></div>
