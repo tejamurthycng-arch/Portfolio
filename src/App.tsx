@@ -10,31 +10,34 @@ import { Achievements } from './sections/Achievements';
 import { Contact } from './sections/Contact';
 import { Footer } from './components/Footer';
 import { DynamicBackground } from './components/DynamicBackground';
+import { SmoothScroll } from './components/SmoothScroll';
 
 export const App: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-black text-slate-100 flex flex-col selection:bg-violet-600 selection:text-white overflow-x-hidden">
-      {/* Interactive 60fps Dynamic Background Engine with Preset Switcher */}
-      <DynamicBackground />
+    <SmoothScroll>
+      <div className="relative min-h-screen bg-black text-slate-100 flex flex-col selection:bg-violet-600 selection:text-white overflow-x-hidden">
+        {/* Interactive 60fps Dynamic Background Engine with Preset Switcher */}
+        <DynamicBackground />
 
-      {/* Navigation */}
-      <Navbar />
+        {/* Navigation */}
+        <Navbar />
 
-      {/* Main Content with Layered Glassmorphic Depth */}
-      <main className="flex-grow z-10 relative">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <HackathonsExperience />
-        <Education />
-        <Achievements />
-        <Contact />
-      </main>
+        {/* Main Content with Layered Glassmorphic Depth */}
+        <main className="flex-grow z-10 relative">
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <HackathonsExperience />
+          <Education />
+          <Achievements />
+          <Contact />
+        </main>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </SmoothScroll>
   );
 };
 
