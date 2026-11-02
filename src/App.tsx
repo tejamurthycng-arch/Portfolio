@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
+import { TechMarquee } from './components/TechMarquee';
 import { About } from './sections/About';
 import { Skills } from './sections/Skills';
 import { Projects } from './sections/Projects';
@@ -25,6 +26,8 @@ export const App: React.FC = () => {
         {/* Main Content with Layered Glassmorphic Depth */}
         <main className="flex-grow z-10 relative">
           <Hero />
+          {/* Infinite Animated Tech Stack & Engineering Marquee */}
+          <TechMarquee />
           <About />
           <Skills />
           <Projects />
