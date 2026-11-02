@@ -9,6 +9,7 @@ import { HackathonsExperience } from './sections/HackathonsExperience';
 import { Education } from './sections/Education';
 import { Achievements } from './sections/Achievements';
 import { Contact } from './sections/Contact';
+import { QuotesMarquee } from './components/QuotesMarquee';
 import { Footer } from './components/Footer';
 import { AnimatedBackground } from './components/AnimatedBackground/AnimatedBackground';
 import { SmoothScroll } from './components/SmoothScroll';
@@ -49,6 +50,9 @@ export const App: React.FC = () => {
 
           {/* Section 6: Contact */}
           <Contact />
+
+          {/* Inspirational Quotes Marquee Before Footer */}
+          <QuotesMarquee />
         </main>
 
         {/* Footer */}
