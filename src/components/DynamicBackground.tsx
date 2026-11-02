@@ -253,15 +253,15 @@ export const DynamicBackground: React.FC = () => {
 
         // Draw upper ambient celestial space
         const skyGrad = ctx.createLinearGradient(0, 0, 0, horizonY);
-        skyGrad.addColorStop(0, 'rgba(5, 6, 15, 0.4)');
-        skyGrad.addColorStop(1, 'rgba(15, 12, 35, 0.2)');
+        skyGrad.addColorStop(0, 'rgba(0, 0, 0, 0.6)');
+        skyGrad.addColorStop(1, 'rgba(10, 8, 25, 0.3)');
         ctx.fillStyle = skyGrad;
         ctx.fillRect(0, 0, width, horizonY);
 
         // Grid plane background
         const groundGrad = ctx.createLinearGradient(0, horizonY, 0, height);
-        groundGrad.addColorStop(0, 'rgba(18, 10, 40, 0.35)');
-        groundGrad.addColorStop(1, 'rgba(5, 6, 15, 0.8)');
+        groundGrad.addColorStop(0, 'rgba(12, 6, 28, 0.4)');
+        groundGrad.addColorStop(1, 'rgba(0, 0, 0, 0.95)');
         ctx.fillStyle = groundGrad;
         ctx.fillRect(0, horizonY, width, height - horizonY);
 
@@ -423,12 +423,12 @@ export const DynamicBackground: React.FC = () => {
 
   return (
     <>
-      {/* Background Container */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Soft atmospheric gradient glows tailored to electric violet & aurora cyan */}
-        <div className="absolute top-[-12%] left-[10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-violet-600/[0.13] via-indigo-900/[0.06] to-transparent blur-[140px]"></div>
-        <div className="absolute bottom-[5%] right-[5%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tl from-cyan-600/[0.1] via-violet-950/[0.07] to-transparent blur-[150px]"></div>
-        <div className="absolute top-[38%] -left-[10%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-fuchsia-600/[0.06] to-transparent blur-[130px]"></div>
+      {/* Background Container with Pitch Black Base */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-black">
+        {/* Soft subtle atmospheric gradient glows tailored to electric violet & aurora cyan */}
+        <div className="absolute top-[-15%] left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-violet-600/[0.08] via-indigo-950/[0.04] to-transparent blur-[160px]"></div>
+        <div className="absolute bottom-[5%] right-[5%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-tl from-cyan-600/[0.06] via-transparent to-transparent blur-[160px]"></div>
+        <div className="absolute top-[40%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-tr from-fuchsia-600/[0.04] to-transparent blur-[140px]"></div>
 
         {/* 60 FPS Canvas rendering active background mode */}
         <canvas

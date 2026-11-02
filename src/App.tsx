@@ -13,7 +13,7 @@ import { DynamicBackground } from './components/DynamicBackground';
 
 export const App: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-[#05060f] text-slate-100 flex flex-col selection:bg-violet-600 selection:text-white overflow-x-hidden">
+    <div className="relative min-h-screen bg-black text-slate-100 flex flex-col selection:bg-violet-600 selection:text-white overflow-x-hidden">
       {/* Interactive 60fps Dynamic Background Engine with Preset Switcher */}
       <DynamicBackground />
 

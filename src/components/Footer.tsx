@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-white/[0.08] bg-black/50 backdrop-blur-3xl text-slate-400 py-12 relative overflow-hidden">
+    <footer className="border-t border-white/[0.08] bg-black/85 backdrop-blur-3xl text-slate-400 py-12 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand info */}
