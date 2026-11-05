@@ -83,12 +83,6 @@ A major focus of this project is the combination of frontend engineering and vis
 
 ---
 
-## 📂 Project Structure
-
-[Include the actual project directory tree here.]
-
----
-
 ## ⚙️ Getting Started
 
 ### Prerequisites
@@ -138,7 +132,6 @@ Deployment configuration:
 
 - **GitHub:** https://github.com/tejamurthycng-arch
 - **LinkedIn:** https://linkedin.com/in/tejamurthy-m
-- **Email:** tejamurthycng@gmail.com
 
 ---
 
@@ -147,6 +140,5 @@ Deployment configuration:
   <br/>
   Building • Learning • Innovating
   <br/><br/>
-  © 2026 Tejamurthy M. All Rights Reserved.
 </p>
 
